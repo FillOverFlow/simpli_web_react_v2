@@ -29,7 +29,7 @@ const config: UserConfig = {
     react(),
     Checker({
       typescript: true,
-      overlay: true,
+      overlay: false,
       eslint: {
         files: 'src',
         extensions: ['.ts', '.tsx']

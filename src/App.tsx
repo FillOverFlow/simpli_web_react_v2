@@ -1,21 +1,12 @@
 import { FC } from 'react'
 import { Link, Slider, styled } from '@mui/material'
 import Header from './components/header'
-
+import Route from './Router'
 
 const App: FC = () => {
   return (
     <Root>
-      <Header />
-      <div>
-        <h2>
-          How much do you like{' '}
-          <Link href='https://vitejs.dev/' target='_blank' rel='noopener noreferrer'>
-            Vite?
-          </Link>
-        </h2>
-        <Slider />
-      </div>
+      <Route></Route>
     </Root>
   )
 }
