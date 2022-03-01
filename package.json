@@ -20,7 +20,8 @@
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-i18next": "^11.15.5",
-    "react-router-dom": "^5.1.0"
+    "react-router": "^6.2.1",
+    "react-router-dom": "^6.2.1"
   },
   "devDependencies": {
     "@types/node": "^14.14.31",
