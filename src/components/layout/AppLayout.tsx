@@ -10,7 +10,7 @@ import { BuySimpliButton, ConnectWallet } from './button';
 
 function AppLayout() {
     return (
-        <Stack flexDirection="column" justifyContent="space-between" height="1024px">
+        <Stack flexDirection="column" justifyContent="space-between" height="100%px">
             <Box mx="146px" my="40px">
                 <Stack direction="row" justifyContent="space-between">
                     <LogoHeader />
