@@ -7,7 +7,6 @@ import metamask from '../assets/metamask.svg';
 import iconsimpli from '../assets/iconsimpli.png';
 import arrow from '../assets/arrow.svg';
 import './style.css';
-import NumberFormat from 'react-number-format';
 
 export interface IHomePageProps {}
 
