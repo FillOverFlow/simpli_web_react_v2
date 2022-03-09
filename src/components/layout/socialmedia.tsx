@@ -9,16 +9,16 @@ export const SocialMediaComponent = () => {
             Social Media
             <Stack spacing="4px" direction="row">
                 <IconButton aria-label="twitter" size="medium">
-                    <img src={twitter} />
+                    <img src={twitter} alt="twitter" />
                 </IconButton>
-                <IconButton aria-label="discord" size="medium">
-                    <img src={telegram} />
+                <IconButton aria-label="telegram" size="medium">
+                    <img src={telegram} alt="telegram" />
                 </IconButton>
                 <IconButton aria-label="medium" size="medium">
-                    <img src={medium} />
+                    <img src={medium} alt="medium" />
                 </IconButton>
                 <IconButton aria-label="discord" size="small">
-                    <img src={discord} style={{ height: '24px', width: '24px' }} />
+                    <img src={discord} style={{ height: '24px', width: '24px' }} alt="discord" />
                 </IconButton>
             </Stack>
         </Stack>

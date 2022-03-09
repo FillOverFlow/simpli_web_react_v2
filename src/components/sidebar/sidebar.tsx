@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Box, Button, Stack, IconButton } from '@mui/material';
+import { useEffect, useRef, useState } from 'react';
+import { Box, Stack } from '@mui/material';
 import { AuditByComponent } from '../layout/auditlogo';
 import { SocialMediaComponent } from '../layout/socialmedia';
 import { useLocation } from 'react-router';
-import { NavLink } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import mascot from '/Simpli_Web3/src/assets/Mascot.svg';
 const SidebarNavItem = [
@@ -46,7 +45,7 @@ const SideBar = () => {
                                     <div>{item.display}</div>
                                 </Link>
                                 <Box width={10} />
-                                <img src={mascot} />
+                                <img src={mascot} alt="mascot" />
                             </Stack>
                         ) : (
                             <Link to={item.to} key={index} style={{ textDecoration: 'none', color: activeIndex === index ? 'rgba(108, 255, 211, 1)' : 'inherit' }}>

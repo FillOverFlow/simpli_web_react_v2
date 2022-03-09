@@ -4,7 +4,7 @@ export const AuditByComponent = (h: string, w: string) => {
     return (
         <Stack fontSize="14px" fontStyle="normal" lineHeight="22px" color="rgba(255, 255, 255, 1)">
             Audited by
-            <img src={audit_by} height={h} width={w} />
+            <img src={audit_by} height={h} width={w} alt='audit'/>
         </Stack>
     );
 };

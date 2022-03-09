@@ -1,26 +1,14 @@
 import {
     Box,
-    Paper,
     Stack,
-    Collapse,
-    InputLabel,
-    FormHelperText,
-    IconButton,
-    List,
-    ListSubheader,
-    ListItem,
-    ListItemIcon,
     Accordion,
     AccordionSummary,
     AccordionDetails,
     Typography,
-    Divider,
-    Grid,
-    formLabelClasses
+    Divider
 } from '@mui/material';
 
 import detaillogo from '../assets/detaillogo.png';
-import iconwalletblock from '../assets/iconwalletblock.svg';
 import fileicon from '../assets/fileicon.svg';
 import metamask from '../assets/metamask.svg';
 import iconsimpli from '../assets/iconsimpli.png';
@@ -36,10 +24,8 @@ import * as React from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
-import { title } from 'process';
-import DonutChart from 'react-donut-chart';
 
-export interface PositionPageProps {}
+export interface PositionPageProps { }
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -89,7 +75,7 @@ const SelectionMenu = () => {
         <Stack direction="row" spacing="24px">
             <div>
                 <FormControl fullWidth>
-                    <Select value={select} onChange={handleChange_Selected} variant="outlined" className="select" >
+                    <Select value={select} onChange={handleChange_Selected} variant="outlined" className="select">
                         <MenuItem value="">
                             <em>None</em>
                         </MenuItem>
@@ -142,6 +128,7 @@ const AccordionEx = () => {
                                     width: '32px',
                                     marginRight: '4px'
                                 }}
+                                alt="ethbtc"
                             />
                             <Typography fontSize="13px" fontWeight="normal" fontStyle="normal">
                                 ETH-BTCB Pancake
@@ -222,6 +209,7 @@ const AccordionEx = () => {
                                     width: '32px',
                                     marginRight: '4px'
                                 }}
+                                alt="ethbtc"
                             />
                             <Typography fontSize="13px" fontWeight="normal" fontStyle="normal">
                                 ETH-BTCB Pancake
@@ -302,6 +290,7 @@ const AccordionEx = () => {
                                     width: '32px',
                                     marginRight: '4px'
                                 }}
+                                alt="ethbtc"
                             />
                             <Typography fontSize="13px" fontWeight="normal" fontStyle="normal">
                                 ETH-BTCB Pancake
@@ -382,6 +371,7 @@ const AccordionEx = () => {
                                     width: '32px',
                                     marginRight: '4px'
                                 }}
+                                alt="ethbtc"
                             />
                             <Typography fontSize="13px" fontWeight="normal" fontStyle="normal">
                                 ETH-BTCB Pancake
@@ -462,6 +452,7 @@ const AccordionEx = () => {
                                     width: '32px',
                                     marginRight: '4px'
                                 }}
+                                alt="ethbtc"
                             />
                             <Typography fontSize="13px" fontWeight="normal" fontStyle="normal">
                                 ETH-BTCB Pancake
@@ -523,11 +514,15 @@ const AccordionEx = () => {
 const YourPosition: React.FunctionComponent<PositionPageProps> = props => {
     let price: number = 1.03;
     let price2: number = 2.0;
-    let price3: number = 6006930.31;
+
 
     return (
         <Box width="100%">
-            <div>Your Positon</div>
+            <Typography
+                fontSize="32px"
+                fontWeight={700}
+                fontStyle="normal">Your Positon
+            </Typography>
             <Stack marginTop="24px" height="182px" direction="row" spacing="40px">
                 <Stack
                     className="backgroundTVL"
@@ -539,7 +534,7 @@ const YourPosition: React.FunctionComponent<PositionPageProps> = props => {
                     justifyContent="center"
                 >
                     <Stack direction="row">
-                        <img src={detaillogo} style={{ height: '182px', width: '168px', borderRadius: 16 }} />
+                        <img src={detaillogo} style={{ height: '182px', width: '168px', borderRadius: 16 }} alt="detaillogo" />
                         <Stack textAlign="center" className="inner_position_2" alignItems="flex-start" spacing="17px">
                             <Stack alignItems="flex-start">
                                 <div
@@ -595,8 +590,8 @@ const YourPosition: React.FunctionComponent<PositionPageProps> = props => {
                     <Stack width="100%" height="32px">
                         <div style={{ fontSize: '12px', fontWeight: 'normal', fontStyle: 'normal', color: '#F9FAFB' }}>SIMPLI Tokens</div>
                         <Stack direction="row" justifyContent="space-between">
-                            <img src={fileicon} style={{ height: '25px', width: '15px' }} />
-                            <img src={metamask} style={{ height: '25px', width: '25px' }} />
+                            <img src={fileicon} style={{ height: '25px', width: '15px' }} alt="fileicon" />
+                            <img src={metamask} style={{ height: '25px', width: '25px' }} alt="metamask" />
                         </Stack>
                     </Stack>
                 </Stack>
@@ -604,7 +599,7 @@ const YourPosition: React.FunctionComponent<PositionPageProps> = props => {
                     <Box width="133px" height="44px">
                         <div style={{ fontSize: '14px', fontWeight: 500, fontStyle: 'normal' }}>SIMPLI Token</div>
                         <Stack direction="row">
-                            <img src={iconsimpli} style={{ width: '15px', height: '15px' }} />
+                            <img src={iconsimpli} style={{ width: '15px', height: '15px' }} alt="iconsimpli" />
                             <div style={{ fontSize: '12px', fontWeight: 400, fontStyle: 'normal' }}>$SIMPLI / UST</div>
                         </Stack>
                     </Box>
@@ -618,6 +613,7 @@ const YourPosition: React.FunctionComponent<PositionPageProps> = props => {
                                         width: '15px',
                                         color: '#229A16'
                                     }}
+                                    alt="arrow"
                                 />
                                 <div style={{ fontSize: '16px', fontWeight: 500, fontStyle: 'normal', color: '#F9FAFB' }}>{price} UST</div>
                             </Stack>
@@ -630,6 +626,7 @@ const YourPosition: React.FunctionComponent<PositionPageProps> = props => {
                                         width: '15px',
                                         color: 'red'
                                     }}
+                                    alt="arrow"
                                 />
                                 <div style={{ fontSize: '16px', fontWeight: 500, fontStyle: 'normal', color: '#F9FAFB' }}>{price} UST</div>
                             </Stack>
@@ -653,9 +650,9 @@ const YourPosition: React.FunctionComponent<PositionPageProps> = props => {
             <Stack width="100%" marginTop="41px" className="overview" padding="24px">
                 <div style={{ fontSize: '20px', fontWeight: 'bold', fontStyle: 'normal', color: '#F9FAFB', alignItems: 'flex-start' }}>Overview</div>
                 <Stack justifyContent="center" alignItems="center">
-                    <Box width="300px" height="200px" border={2}>
+                    <Stack width="200px" height="200px" border={2} alignItems="center" justifyContent="center" borderRadius="100%">
                         Donut Chart
-                    </Box>
+                    </Stack>
                 </Stack>
                 <Stack width="100%" marginTop="24px">
                     <div style={{ fontSize: '20px', fontWeight: 'bold', fontStyle: 'normal', color: '#F9FAFB', alignItems: 'flex-start' }}>Asset Allocation List</div>
