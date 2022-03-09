@@ -1,173 +1,269 @@
 @media screen and (min-width: 1024px) {
-    .App-header {
-        background: linear-gradient(0deg, rgba(14, 31, 45, 0.56) 0%, rgba(14, 31, 45, 0.56) 0%), url('../assets/bg_image.png');
-        background-attachment: fixed;
-        min-height: 100vmin;
-        display: flex;
-        background-size: cover;
-        background-position-x: center;
-        background-position-y: center;
-        background-repeat: no-repeat;
-        flex-direction: column;
-        font-size: calc(10px + 2vmin);
-        color: white;
-    }
+  .App-header {
+    background: linear-gradient(
+        0deg,
+        rgba(14, 31, 45, 0.56) 0%,
+        rgba(14, 31, 45, 0.56) 0%
+      ),
+      url('../assets/bg_image.png');
+    background-attachment: fixed;
+    min-height: 100vmin;
+    display: flex;
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: center;
+    background-repeat: no-repeat;
+    flex-direction: column;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
 }
 .backgroundTVL {
-    background: linear-gradient(90deg, #0075bf 42.33%, #6cffd3 101.26%);
-    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.24), 0px 16px 32px -4px rgba(0, 0, 0, 0.24);
+  background: linear-gradient(90deg, #0075bf 42.33%, #6cffd3 101.26%);
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.24),
+    0px 16px 32px -4px rgba(0, 0, 0, 0.24);
 }
 
 .blockWallet {
-    background: #17283c;
-    border: 1px solid #00214b;
-    box-sizing: border-box;
-    /* Shadow / Z16 Card */
+  background: #17283c;
+  border: 1px solid #00214b;
+  box-sizing: border-box;
+  /* Shadow / Z16 Card */
 
-    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.24), 0px 16px 32px -4px rgba(0, 0, 0, 0.24);
-    border-radius: 16px;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.24),
+    0px 16px 32px -4px rgba(0, 0, 0, 0.24);
+  border-radius: 16px;
 }
 .assetAllocation {
-    background: #17283c;
-    /* 01 Primary/05 Darker */
+  background: #17283c;
+  /* 01 Primary/05 Darker */
 
-    border: 1px solid #002339;
-    box-sizing: border-box;
-    /* Shadow / Z16 Card */
+  border: 1px solid #002339;
+  box-sizing: border-box;
+  /* Shadow / Z16 Card */
 
-    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.24), 0px 16px 32px -4px rgba(0, 0, 0, 0.24);
-    border-radius: 16px;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.24),
+    0px 16px 32px -4px rgba(0, 0, 0, 0.24);
+  border-radius: 16px;
 }
 .inner_position_1 {
-    position: absolute;
-    display: block;
-    width: 436px;
-    height: 108px;
-    left: 403px;
-    top: 227px;
-    z-index: 99999;
+  position: absolute;
+  display: block;
+  width: 436px;
+  height: 108px;
+  left: 403px;
+  top: 227px;
+  z-index: 99999;
 }
 .inner_position_2 {
-    position: absolute;
-    display: block;
-    z-index: 99999;
-    padding: 24px;
+  position: absolute;
+  display: block;
+  z-index: 99999;
+  padding: 24px;
 }
 .inner_position_3 {
-    position: absolute;
-    display: block;
-    /* กำหนดความสูงส่วนของเนื้อหาที่นำมาซ้อนทับ แบบขยายเต็ม */ /* กำหนดความกว้างของเนื้อหาที่นำมาซ้อนทับ */
-    z-index: 999;
+  position: absolute;
+  display: block;
+  /* กำหนดความสูงส่วนของเนื้อหาที่นำมาซ้อนทับ แบบขยายเต็ม */ /* กำหนดความกว้างของเนื้อหาที่นำมาซ้อนทับ */
+  z-index: 999;
 }
 .max-lines {
-    display: -webkit-box;
-    -webkit-line-clamp: 1; /* number of lines to show */
-    -webkit-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* number of lines to show */
+  -webkit-box-orient: vertical;
 }
 .text {
-    position: relative;
-    font-size: 14px;
-    color: black;
-    width: 250px; /* Could be anything you like. */
+  position: relative;
+  font-size: 14px;
+  color: black;
+  width: 250px; /* Could be anything you like. */
 }
 
 .text-concat {
-    position: relative;
-    display: inline-block;
-    word-wrap: break-word;
-    overflow: hidden;
-    max-height: 3.6em; /* (Number of lines you want visible) * (line-height) */
-    line-height: 1.2em;
-    text-align: justify;
+  position: relative;
+  display: inline-block;
+  word-wrap: break-word;
+  overflow: hidden;
+  max-height: 3.6em; /* (Number of lines you want visible) * (line-height) */
+  line-height: 1.2em;
+  text-align: justify;
 }
 
 .text.ellipsis::after {
-    content: '...';
-    position: absolute;
-    right: -12px;
-    bottom: 4px;
+  content: '...';
+  position: absolute;
+  right: -12px;
+  bottom: 4px;
 }
 .overview {
-    /* 08 Color/02 Card */
-    background: #17283c;
-    /* 01 Primary/05 Darker */
-    border: 1px solid #002339;
-    box-sizing: border-box;
-    /* Shadow / Z16 Card */
-    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.24), 0px 16px 32px rgba(0, 0, 0, 0.24);
-    border-radius: 16px;
-    overflow: hidden;
+  /* 08 Color/02 Card */
+  background: #17283c;
+  /* 01 Primary/05 Darker */
+  border: 1px solid #002339;
+  box-sizing: border-box;
+  /* Shadow / Z16 Card */
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.24), 0px 16px 32px rgba(0, 0, 0, 0.24);
+  border-radius: 16px;
+  overflow: hidden;
 }
 .select {
-    height: 48px;
-    width: 223px;
-    background: rgba(145, 158, 171, 0.16);
-    border: 1px solid rgba(145, 158, 171, 0.24);
-    box-sizing: border-box;
-    border-radius: 8px;
-    position: relative;
+  height: 48px;
+  width: 223px;
+  background: rgba(145, 158, 171, 0.16);
+  border: 1px solid rgba(145, 158, 171, 0.24);
+  box-sizing: border-box;
+  border-radius: 8px;
+  position: relative;
 }
 .search {
-    background: rgba(145, 158, 171, 0.16);
-    border: 1px solid rgba(145, 158, 171, 0.24);
-    box-sizing: border-box;
-    border-radius: 8px;
+  background: rgba(145, 158, 171, 0.16);
+  border: 1px solid rgba(145, 158, 171, 0.24);
+  box-sizing: border-box;
+  border-radius: 8px;
 }
 .accordion-summary {
-    width: 902px;
-    height: 57px;
-    background: rgba(145, 158, 171, 0.16);
-    border: 1px solid rgba(145, 158, 171, 0.24);
-    box-sizing: border-box;
-    border-radius: 16px;
+  width: 902px;
+  height: 57px;
+  background: rgba(145, 158, 171, 0.16);
+  border: 1px solid rgba(145, 158, 171, 0.24);
+  box-sizing: border-box;
+  border-radius: 16px;
 }
 .accordion-detail {
-    width: 902px;
-    height: 152px;
-    background: rgba(145, 158, 171, 0.16);
-    border: 1px solid rgba(145, 158, 171, 0.24);
-    box-sizing: border-box;
-    border-radius: 16px;
+  width: 902px;
+  height: 152px;
+  background: rgba(145, 158, 171, 0.16);
+  border: 1px solid rgba(145, 158, 171, 0.24);
+  box-sizing: border-box;
+  border-radius: 16px;
 }
 .scroll-bar ::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 chart {
-    width: 180px;
-    height: 180px;
-    background: rgba(145, 158, 171, 0.16);
-    border: 1px solid rgba(145, 158, 171, 0.24);
-    box-sizing: border-box;
-    box-shadow: 0px 2.66667px 33.3333px rgba(0, 0, 0, 0.08);
-    border-radius: 100%;
+  width: 180px;
+  height: 180px;
+  background: rgba(145, 158, 171, 0.16);
+  border: 1px solid rgba(145, 158, 171, 0.24);
+  box-sizing: border-box;
+  box-shadow: 0px 2.66667px 33.3333px rgba(0, 0, 0, 0.08);
+  border-radius: 100%;
 }
 .donutchart-arcs-path,
 .donutchart-legend-item,
 .donutchart-legend-item-label {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .donutchart-innertext-label {
-    font-size: 18px;
+  font-size: 18px;
 }
 
 .donutchart-innertext-value {
-    font-size: 36px;
-    font-weight: bold;
+  font-size: 36px;
+  font-weight: bold;
 }
 .donutchart-arcs-path,
 .donutchart-arcs-path,
 .donutchart-legend-item {
-    fill-opacity: 0;
-    animation-timing-function: ease-in-out;
-    animation-fill-mode: forwards;
-    animation-name: DrawLine, FillIn;
-    animation-delay: 0.5s, 2s;
-    animation-duration: 3s, 1s;
-    stroke-dasharray: 1500;
-    stroke-dashoffset: 1500;
+  fill-opacity: 0;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+  animation-name: DrawLine, FillIn;
+  animation-delay: 0.5s, 2s;
+  animation-duration: 3s, 1s;
+  stroke-dasharray: 1500;
+  stroke-dashoffset: 1500;
 }
 
 .selectex {
-    position: relative;
+  position: relative;
+}
+
+.stake-header {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.apr-bar {
+  width: 725px;
+  height: 80px;
+
+  background: #17283c;
+  border: 1px solid #00214b;
+  box-sizing: border-box;
+  /* Shadow/Z16 Card */
+
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.24),
+    0px 16px 32px -4px rgba(0, 0, 0, 0.24);
+  border-radius: 16px;
+}
+.stake-box {
+  width: 725px;
+  height: 241px;
+
+  background: #17283c;
+
+  border: 1px solid #002339;
+  box-sizing: border-box;
+  /* Shadow/Z16 Card */
+
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.24),
+    0px 16px 32px -4px rgba(0, 0, 0, 0.24);
+  border-radius: 16px;
+}
+.box-balance {
+  width: 256px;
+  height: 158px;
+  padding: 24px;
+  /* 08 Color/02 Card */
+
+  background: #17283c;
+  /* 01 Primary/05 Darker */
+
+  border: 1px solid #002339;
+  box-sizing: border-box;
+  /* Shadow/Z16 Card */
+
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.24),
+    0px 16px 32px -4px rgba(0, 0, 0, 0.24);
+  border-radius: 16px;
+}
+.box-unstaked {
+  width: 256px;
+  height: 158px;
+  padding: 24px;
+  /* 08 Color/02 Card */
+  padding-inline: 24px;
+  background: #17283c;
+  /* 01 Primary/05 Darker */
+
+  border: 1px solid #002339;
+  box-sizing: border-box;
+  /* Shadow/Z16 Card */
+
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.24),
+    0px 16px 32px -4px rgba(0, 0, 0, 0.24);
+  border-radius: 16px;
+}
+.stake-boxx {
+  height: 57px;
+
+  background: rgba(145, 158, 171, 0.16);
+  border: 1px solid rgba(145, 158, 171, 0.24);
+  box-sizing: border-box;
+  border-radius: 16px;
+}
+.stake-rate {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 8px 6px;
+  width: 296px;
+  height: 32px;
+  background: rgba(108, 255, 211, 0.16);
+  border: 1px solid #6cffd3;
+  box-sizing: border-box;
+  border-radius: 30px;
 }

@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Box, Button, Stack, IconButton } from '@mui/material';
+import { useEffect, useRef, useState } from 'react';
+import { Box, Stack } from '@mui/material';
 import { AuditByComponent } from '../layout/auditlogo';
 import { SocialMediaComponent } from '../layout/socialmedia';
 import { useLocation } from 'react-router';
-import { NavLink } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import mascot from '../../assets/Mascot.svg';
 const SidebarNavItem = [

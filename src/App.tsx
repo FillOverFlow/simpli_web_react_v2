@@ -1,6 +1,6 @@
 import { FC } from 'react'
-import { Link, Slider, styled } from '@mui/material'
-import Header from './components/header'
+import { styled } from '@mui/material'
+
 import Route from './Router'
 import './pages/style.css'
 const App: FC = () => {
