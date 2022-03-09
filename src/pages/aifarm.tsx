@@ -6,9 +6,10 @@ import fileicon from '../assets/fileicon.svg';
 import metamask from '../assets/metamask.svg';
 import iconsimpli from '../assets/iconsimpli.png';
 import arrow from '../assets/arrow.svg';
-export interface IHomePageProps {}
 import './style.css';
 import NumberFormat from 'react-number-format';
+
+export interface IHomePageProps {}
 
 const AIFarm: React.FunctionComponent<IHomePageProps> = props => {
     let price: number = 1.03;
