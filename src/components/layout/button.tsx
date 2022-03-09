@@ -1,6 +1,9 @@
-import { Button, styled, Typography } from '@mui/material';
-import icon_wallet from '/Simpli_Web3/src/assets/icon_wallet.png';
-import logosimplix from '/Simpli_Web3/src/assets/logosimplix.svg';
+import { Button, Stack, styled, Typography } from '@mui/material';
+import icon_wallet from '../../assets/icon_wallet.png';
+import logosimplix from '../../assets/logosimplix.svg';
+import iconsimpli from '../../assets/iconsimpli.png';
+import iconwallet_black from '../../assets/iconwallet_black.svg';
+import React from 'react';
 
 const ConnectWalletStyled = styled(Button)({
     backgroundColor: 'rgba(108, 255, 211, 0.16)',
@@ -42,7 +45,6 @@ const BuySimpliStyled = styled(Button)({
     borderRadius: '16px',
     paddingInline: '30px',
     textTransform: 'none'
-
 });
 export const BuySimpliButton = () => {
     return (
