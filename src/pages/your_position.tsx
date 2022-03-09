@@ -642,7 +642,7 @@ const YourPosition: React.FunctionComponent<PositionPageProps> = props => {
                             <NumberFormat value={1.01} displayType={'text'} thousandSeparator={true} />
                             <div>$SIMPLI</div>
                         </Stack>
-                        <div style={{ fontSize: '10px', fontWeight: '400', fontStyle: 'normal', color: '#F9FAFB', marginBottom: '17px' }}>$ 0.0</div>
+                        <div style={{ fontSize: '10px', fontWeight: 400, fontStyle: 'normal', color: '#F9FAFB', marginBottom: '17px' }}>$ 0.0</div>
                         <ClaimButton />
                     </Box>
                 </Stack>
