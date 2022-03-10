@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import mascot from '/Simpli_Web3/src/assets/Mascot.svg';
 const SidebarNavItem = [
     { display: 'AI Farm', to: '/', section: '' },
-    { display: 'Farm', to: '/farm', section: 'farm' },
+    { display: 'Manual Farm', to: '/farm', section: 'farm' },
     { display: 'Your Position', to: '/position', section: 'position' },
     { display: 'Stake', to: '/stake', section: 'stake' },
     { display: 'Document', to: '/document', section: 'document' }

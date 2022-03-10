@@ -1,4 +1,4 @@
-import { Button, ButtonProps, Stack, styled, Typography } from '@mui/material';
+import { Button, Stack, styled, Typography } from '@mui/material';
 import icon_wallet from '/Simpli_Web3/src/assets/icon_wallet.png';
 import logosimplix from '/Simpli_Web3/src/assets/logosimplix.svg';
 import iconsimpli from '../../assets/iconsimpli.png';

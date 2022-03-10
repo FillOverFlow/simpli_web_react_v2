@@ -6,16 +6,10 @@
         rgba(14, 31, 45, 0.56) 0%
       ),
       url('../assets/bg_image.png');
-    background-attachment: fixed;
     min-height: 100vmin;
-    display: flex;
+    min-width: 100vmin;
     background-size: cover;
-    background-position-x: center;
-    background-position-y: center;
-    background-repeat: no-repeat;
-    flex-direction: column;
-    font-size: calc(10px + 2vmin);
-    color: white;
+
   }
 }
 .backgroundTVL {
@@ -109,11 +103,11 @@
 .select {
   height: 48px;
   width: 223px;
+  padding-inline: 16px;
   background: rgba(145, 158, 171, 0.16);
-  border: 1px solid rgba(145, 158, 171, 0.24);
-  box-sizing: border-box;
+  color-scheme: #919eab;
   border-radius: 8px;
-  position: relative;
+  color: #f9fafb;
 }
 .search {
   background: rgba(145, 158, 171, 0.16);
@@ -185,6 +179,11 @@ chart {
   display: flex;
   flex-direction: column;
 }
+.farm-header {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 .apr-bar {
   width: 725px;
   height: 80px;
@@ -248,7 +247,6 @@ chart {
 }
 .stake-boxx {
   height: 57px;
-
   background: rgba(145, 158, 171, 0.16);
   border: 1px solid rgba(145, 158, 171, 0.24);
   box-sizing: border-box;
