@@ -1,14 +1,14 @@
-import { Box, Paper, Stack, Collapse, Typography } from '@mui/material';
-
+import { Box, Stack } from '@mui/material';
+import './style.css';
+import NumberFormat from 'react-number-format';
 import detaillogo from '../assets/detaillogo.png';
-import iconwalletblock from '../assets/iconwalletblock.svg';
 import fileicon from '../assets/fileicon.svg';
 import metamask from '../assets/metamask.svg';
 import iconsimpli from '../assets/iconsimpli.png';
 import arrow from '../assets/arrow.svg';
-export interface IHomePageProps {}
 import './style.css';
-import NumberFormat from 'react-number-format';
+
+export interface IHomePageProps {}
 
 const AIFarm: React.FunctionComponent<IHomePageProps> = props => {
     let price: number = 1.03;
@@ -34,7 +34,7 @@ const AIFarm: React.FunctionComponent<IHomePageProps> = props => {
                         justifyContent="center"
                     >
                         <Stack direction="row">
-                            <img src={detaillogo} style={{ height: '182px', width: '168px', borderRadius: 16 }} />
+                            <img src={detaillogo} style={{ height: '182px', width: '168px', borderRadius: 16 }} alt='detaillogo' />
                             <Stack justifyContent="center" textAlign="center" className="inner_position_1">
                                 <div>Total Value Locked</div>
                                 <NumberFormat
@@ -62,8 +62,8 @@ const AIFarm: React.FunctionComponent<IHomePageProps> = props => {
                         <Stack width="100%" height="32px">
                             <div style={{ fontSize: '12px', fontWeight: 'normal', fontStyle: 'normal', color: '#F9FAFB' }}>SIMPLI Tokens</div>
                             <Stack direction="row" justifyContent="space-between">
-                                <img src={fileicon} style={{ height: '25px', width: '15px' }} />
-                                <img src={metamask} style={{ height: '25px', width: '25px' }} />
+                                <img src={fileicon} style={{ height: '25px', width: '15px' }} alt='fileicon' />
+                                <img src={metamask} style={{ height: '25px', width: '25px' }} alt='metamask' />
                             </Stack>
                         </Stack>
                     </Stack>
@@ -71,7 +71,7 @@ const AIFarm: React.FunctionComponent<IHomePageProps> = props => {
                         <Box width="133px" height="44px">
                             <div style={{ fontSize: '14px', fontWeight: 500, fontStyle: 'normal' }}>SIMPLI Token</div>
                             <Stack direction="row">
-                                <img src={iconsimpli} style={{ width: '15px', height: '15px' }} />
+                                <img src={iconsimpli} style={{ width: '15px', height: '15px' }} alt="Simpli" />
                                 <div style={{ fontSize: '12px', fontWeight: 400, fontStyle: 'normal' }}>$SIMPLI / UST</div>
                             </Stack>
                         </Box>
@@ -85,6 +85,7 @@ const AIFarm: React.FunctionComponent<IHomePageProps> = props => {
                                             width: '15px',
                                             color: '#229A16'
                                         }}
+                                        alt="arrow"
                                     />
                                     <div style={{ fontSize: '16px', fontWeight: 500, fontStyle: 'normal', color: '#F9FAFB' }}>{price} UST</div>
                                 </Stack>
@@ -97,23 +98,13 @@ const AIFarm: React.FunctionComponent<IHomePageProps> = props => {
                                             width: '15px',
                                             color: 'red'
                                         }}
+                                        alt="arrow"
                                     />
                                     <div style={{ fontSize: '16px', fontWeight: 500, fontStyle: 'normal', color: '#F9FAFB' }}>{price} UST</div>
                                 </Stack>
                             )}
                         </Box>
-                        {/* <Stack width="100%" height="32px" direction="row" justifyContent="flex-end">
-                            <Box position="absolute" display="block" zIndex={9999} marginRight={4}>
-                                <div style={{ fontSize: '12px', fontWeight: 'normal', fontStyle: 'normal', color: '#F9FAFB' }}>KillSwitch Tokens</div>
-                                <Stack direction="row" spacing={1}>
-                                    <img src={fileicon} style={{ height: '20px', width: '15px' }} />
-                                    <img src={metamask} style={{ height: '20px', width: '20px' }} />
-                                </Stack>
-                            </Box>
-                            <Box>
-                                <img src={iconwalletblock} style={{ color: '#F9FAFB', opacity: 0.1, height: '40px', width: '43px' }} />
-                            </Box>
-                        </Stack> */}
+
                     </Stack>
                 </Stack>
                 <Stack style={{ width: '100%', height: '298px' }} className="assetAllocation"></Stack>
