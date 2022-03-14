@@ -4,23 +4,67 @@ import {
   ConnectWallet2
 } from '@/components/layout/button';
 import { Box, Stack, Typography, Link } from '@mui/material';
-import React, { useState } from 'react';
-import './style.css';
+import React, { useEffect, useState } from 'react';
 import iconsimpli from '../assets/iconsimpli.png';
+import './style.css';
+import StakeAPI from '@/apis/stake'
+import { useGetBalanceOfSIMPLI } from '@/hooks/simpliToken';
+import { useEthers, useTokenBalance } from '@usedapp/core';
+import { formatUnits, formatEther } from '@ethersproject/units'
+import { weiToEther } from '@/utils/web3';
 
 export interface StakePageProps {}
 
 const Stake: React.FC<StakePageProps> = () => {
-  const [stakeType, setStakeType] = useState('stake');
-
+  const [stakeType, setStakeType] = useState('stake')
+  const [stakeAPR , setStakeAPR] = useState('3.61')
+  const { account } = useEthers();
+  const walletAddress = account
+  const walletConnected = account ? true : false
+  const address = import.meta.env.VITE_SMARTCONTACT_ADDRESS
   const _handleClickStake = (e: React.MouseEvent, title: string) => {
     setStakeType(title);
   };
+
+  /**
+   * START SMART CONTRACT for STAKE 
+   */
+
+  const simpliTokenAddress = import.meta.env.VITE_SIMPLI_TOKEN_ADDRESS as string
+  const stakingAddress = import.meta.env.SIMPLI_STEAKING_ADDRESS as string
+  const balanceSIMPLI = useTokenBalance(simpliTokenAddress, walletAddress)
+
+
+
+  /** END  */
+  const callStakingAPI = async() => {
+    try {
+      const stakeAPR = await StakeAPI.stakingAPR()
+      stakeAPR && setStakeAPR(stakeAPR)
+    }catch(e){
+      console.error('in stakePage Error load StakeAPR', e)
+    }
+  }
+
+  useEffect(() =>{
+    // callStakingAPI()
+  },[])
+  
   return (
     <header className="stake-header">
-      <Typography fontSize="32px" fontWeight={700} fontStyle="normal" color='#FFFFFF'>
+      <Typography
+        fontSize="32px"
+        fontWeight={700}
+        fontStyle="normal"
+        color="#FFFFFF"
+      >
         Maximize yield by Staking $SIMPLI
       </Typography>
+      <Stack direction="row">
+        <Box>
+          <h3>smartContract ENV Address : {address}</h3>
+        </Box>
+      </Stack>
       <Stack direction="row">
         <Box>
           <Stack
@@ -50,7 +94,7 @@ const Stake: React.FC<StakePageProps> = () => {
                 fontStyle="normal"
                 color="#F9FAFB"
               >
-                3.10%
+                {stakeAPR}%
                 <Box
                   fontSize="14px"
                   fontWeight="normal"
@@ -174,7 +218,7 @@ const Stake: React.FC<StakePageProps> = () => {
                   >
                     <div>Balance :</div>
                     <Box width="10px" />
-                    <div>0.0</div>
+                    <div>{balanceSIMPLI && formatUnits(balanceSIMPLI)}</div>
                   </Typography>
                   <Box width="24px" />
                   <Link
@@ -233,7 +277,6 @@ const Stake: React.FC<StakePageProps> = () => {
                 </Stack>
               </Stack>
             </Stack>
-
             <Stack className="box-unstaked">
               <Typography
                 fontSize="20px"
@@ -256,7 +299,7 @@ const Stake: React.FC<StakePageProps> = () => {
                     fontStyle="normal"
                     color="#F9FAFB"
                   >
-                    xSIMPLI
+                    SIMPLI
                   </Typography>
                   <Typography
                     fontSize="16px"
@@ -264,7 +307,7 @@ const Stake: React.FC<StakePageProps> = () => {
                     fontStyle="normal"
                     color="#6CFFD3"
                   >
-                    0.0
+                  {balanceSIMPLI && weiToEther(balanceSIMPLI,10)}
                   </Typography>
                 </Stack>
               </Stack>

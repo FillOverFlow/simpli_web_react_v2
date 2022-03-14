@@ -4,6 +4,8 @@ import logosimplix from '../../assets/logosimplix.svg';
 import iconsimpli from '../../assets/iconsimpli.png';
 import iconwallet_black from '../../assets/iconwallet_black.svg';
 import React from 'react';
+import { useEthers } from '@usedapp/core';
+import { truncate } from '@/utils/web3';
 
 const ConnectWalletStyled = styled(Button)({
   backgroundColor: 'rgba(108, 255, 211, 0.16)',
@@ -24,14 +26,17 @@ const ConnectWalletStyled = styled(Button)({
 });
 
 export const ConnectWallet = () => {
+  const { activateBrowserWallet, account } = useEthers();
   return (
-    <ConnectWalletStyled>
-      <img
-        src={icon_wallet}
-        style={{ marginRight: '7.5px', width: '16px', height: '16px' }}
-        alt="icon"
-      />
-      Connect Wallet
+    <ConnectWalletStyled onClick={() => activateBrowserWallet}>
+      <div>
+        <img
+          src={icon_wallet}
+          style={{ marginRight: '7.5px', width: '16px', height: '16px' }}
+          alt="icon"
+        />
+        { account ? truncate(account) : 'Connect Wallet'}
+      </div>
     </ConnectWalletStyled>
   );
 };
@@ -52,14 +57,15 @@ const ConnectWallet2Styled = styled(Button)({
 });
 
 export const ConnectWallet2 = () => {
+  const { activateBrowserWallet, account } = useEthers();
   return (
-    <ConnectWallet2Styled>
+    <ConnectWallet2Styled onClick={() => activateBrowserWallet()}>
       <img
         src={iconwallet_black}
         style={{ marginRight: '7.5px', width: '16px', height: '16px' }}
         alt="icon"
       />
-      Connect Wallet
+      { account ? truncate(account) : 'Connect Wallet'}
     </ConnectWallet2Styled>
   );
 };
