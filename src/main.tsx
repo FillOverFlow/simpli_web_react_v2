@@ -9,16 +9,12 @@ import { Box } from '@mui/system';
 import { LogoFooter } from './components/footer/footer';
 import { AuditByComponent } from './components/layout/auditlogo';
 import { SocialMediaComponent } from './components/layout/socialmedia';
-// import Swal from 'sweetalert2/dist/sweetalert2.js'
+import { MainNet , TestNet } from './config/chainnetwork';
 
 import 'sweetalert2/dist/sweetalert2.css'
 
-const config: Config = {
-  readOnlyChainId: Mainnet.chainId,
-  readOnlyUrls: {
-    [Mainnet.chainId]: 'https://mainnet.infura.io/v3/57fc2c19095745e59ab96a4aa87dada8',
-  },
-}
+const network = import.meta.env.VITE_APP_CHAIN_NETWORK as string;
+const config  = (network == 'mainnet') ? MainNet : TestNet
 
 ReactDOM.render(
   <StrictMode>

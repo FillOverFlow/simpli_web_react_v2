@@ -1,7 +1,8 @@
 import {
   StakeButton,
   UnStakeButton,
-  ConnectWallet2
+  ConnectWallet2,
+  ButtonEx
 } from '@/components/layout/button';
 import { Box, Stack, Typography, Link } from '@mui/material';
 import React, { useEffect, useMemo, useState } from 'react';
@@ -51,15 +52,15 @@ const Stake: React.FC<StakePageProps> = () => {
 					valueLeft={2}/>),
         showCloseButton: true
     })
-    // try { 
-    //   const stakeAPR = await StakeAPI.stakingAPR()
-    //   setStakeAPR(stakeAPR)
-    //   Swal.SwalClose()
-    // }catch(e){
-    //   await Swal.SwalError({
-    //     text: (e as any )?.message as string
-    //   })
-    // }
+    try { 
+      const stakeAPR = await StakeAPI.stakingAPR()
+      setStakeAPR(stakeAPR)
+      Swal.SwalClose()
+    }catch(e){
+      await Swal.SwalError({
+        text: (e as any )?.message as string
+      })
+    }
   }
 
   useEffect(() =>{
@@ -250,8 +251,12 @@ const Stake: React.FC<StakePageProps> = () => {
                   </Link>
                 </Box>
               </Stack>
-
-              <ConnectWallet2 />
+              {
+                walletConnected ? 
+                  (stakeType == 'stake') ? ButtonEx('stake') : ButtonEx('unstake')
+                :
+                <ConnectWallet2/>
+            }
             </Stack>
           </Stack>
         </Box>
