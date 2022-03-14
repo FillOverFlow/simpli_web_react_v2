@@ -8,7 +8,9 @@ import React, { useState } from 'react';
 import './style.css';
 import iconsimpli from '../assets/iconsimpli.png';
 
-const Stake: React.FC = () => {
+export interface StakePageProps {}
+
+const Stake: React.FC<StakePageProps> = () => {
   const [stakeType, setStakeType] = useState('stake');
 
   const _handleClickStake = (e: React.MouseEvent, title: string) => {
@@ -16,7 +18,7 @@ const Stake: React.FC = () => {
   };
   return (
     <header className="stake-header">
-      <Typography fontSize="32px" fontWeight={700} fontStyle="normal">
+      <Typography fontSize="32px" fontWeight={700} fontStyle="normal" color='#FFFFFF'>
         Maximize yield by Staking $SIMPLI
       </Typography>
       <Stack direction="row">
