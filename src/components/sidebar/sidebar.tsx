@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
-import { Box, Stack } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
 import { AuditByComponent } from '../layout/auditlogo';
 import { SocialMediaComponent } from '../layout/socialmedia';
 import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
-import mascot from '../../assets/Mascot.svg';
+
 const SidebarNavItem = [
   { display: 'AI Farm', to: '/', section: '' },
   { display: 'Manual Farm', to: '/farm', section: 'farm' },
@@ -37,7 +37,14 @@ const SideBar = () => {
       }}
       fontSize="14px"
     >
-      Menu
+      <Typography
+        fontSize="14px"
+        fontWeight="400px"
+        fontStyle="normal"
+        color="#FFFFFF"
+      >
+        Menu
+      </Typography>
       <Stack
         ref={indicatorRef}
         spacing="24px"
@@ -49,37 +56,17 @@ const SideBar = () => {
       >
         {SidebarNavItem.map((item, index) => (
           <Stack flexDirection="row">
-            {item.display === 'AI Farm' ? (
-              <Stack flexDirection="row">
-                <Link
-                  to={item.to}
-                  key={index}
-                  style={{
-                    textDecoration: 'none',
-                    color:
-                      activeIndex === index
-                        ? 'rgba(108, 255, 211, 1)'
-                        : 'inherit'
-                  }}
-                >
-                  <div>{item.display}</div>
-                </Link>
-                <Box width={10} />
-                <img src={mascot} />
-              </Stack>
-            ) : (
-              <Link
-                to={item.to}
-                key={index}
-                style={{
-                  textDecoration: 'none',
-                  color:
-                    activeIndex === index ? 'rgba(108, 255, 211, 1)' : 'inherit'
-                }}
-              >
-                <div>{item.display}</div>
-              </Link>
-            )}
+            <Link
+              to={item.to}
+              key={index}
+              style={{
+                textDecoration: 'none',
+                color:
+                  activeIndex === index ? 'rgba(108, 255, 211, 1)' : '#FFFFFF'
+              }}
+            >
+              <div>{item.display}</div>
+            </Link>
           </Stack>
         ))}
       </Stack>

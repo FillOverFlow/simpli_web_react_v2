@@ -1,32 +1,22 @@
-import {
-  Box,
-  Stack,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  Typography,
-  Divider,
-  AccordionActions
-} from '@mui/material';
+import { Box, Stack, Typography, IconButton } from '@mui/material';
 
 import detaillogo from '../assets/detaillogo.png';
 import fileicon from '../assets/fileicon.svg';
 import metamask from '../assets/metamask.svg';
 import iconsimpli from '../assets/iconsimpli.png';
-import ethbtc from '../assets/eth-btc.svg';
+
 import arrow from '../assets/arrow.svg';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
 import './style.css';
 import NumberFormat from 'react-number-format';
-import { ButtonEx, ClaimB, ClaimButton } from '@/components/layout/button';
-import { MenuItem, FormControl } from '@mui/material';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { ClaimButton } from '@/components/layout/button';
+
 import * as React from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import UnstyledSelectSimple from '@/components/layout/selectBox';
-import Option from 'react-select/dist/declarations/src/components/Option';
+
 import CustomizedAccordions from '@/components/layout/accordion';
 
 export interface PositionPageProps {}
@@ -51,18 +41,18 @@ const Search = styled('div')(({ theme }) => ({
 const SearchIconWrapper = styled('div')(({ theme }) => ({
   padding: theme.spacing(0, 2),
   height: '100%',
+  color: '#fffff',
   position: 'absolute',
   pointerEvents: 'none',
   display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center'
+  alignItems: 'center'
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
+  color: '#ffffff',
   '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    paddingTop: '10px',
+    paddingLeft: `calc(1em + ${theme.spacing(5)})`,
     transition: theme.transitions.create('width'),
     width: '100%',
 
@@ -89,45 +79,25 @@ const SelectionMenu = () => {
   );
 };
 
-const AccordionEx = () => {
-  const [current, setCurrent] = React.useState(-1);
-
-  const handleChange_Accordion =
-    (panel: number) => (event: React.SyntheticEvent, isExpanded: number) => {
-      setCurrent(isExpanded ? panel : panel);
-    };
-  return (
-    <Stack>
-      <div>
-        <Accordion
-          expanded={current === 0}
-          onChange={() => handleChange_Accordion}
-        >
-          <AccordionSummary></AccordionSummary>
-          <AccordionDetails></AccordionDetails>
-          <AccordionActions></AccordionActions>
-        </Accordion>
-      </div>
-    </Stack>
-  );
-};
 const YourPosition: React.FunctionComponent<PositionPageProps> = (props) => {
   let price: number = 1.03;
   let price2: number = 2.0;
 
   return (
     <Box width="100%">
-      <Typography fontSize="32px" fontWeight={700} fontStyle="normal">
+      <Typography
+        fontSize="32px"
+        fontWeight="bold"
+        fontStyle="normal"
+        color="#FFFFFF"
+      >
         Your Positon
       </Typography>
       <Stack marginTop="24px" height="182px" direction="row" spacing="40px">
         <Stack
           className="backgroundTVL"
-          style={{
-            width: '435px',
-            height: '182px',
-            borderRadius: 16
-          }}
+          width="435px"
+          height="182px"
           justifyContent="center"
         >
           <Stack direction="row">
@@ -143,149 +113,167 @@ const YourPosition: React.FunctionComponent<PositionPageProps> = (props) => {
               spacing="17px"
             >
               <Stack alignItems="flex-start">
-                <div
-                  style={{
-                    fontSize: '16px',
-                    fontWeight: 500,
-                    fontStyle: 'normal',
-                    color: '#F9FAFB'
-                  }}
+                <Typography
+                  fontSize="16px"
+                  fontWeight="500px"
+                  fontStyle="normal"
+                  color="#F9FAFB"
                 >
                   Total Value Locked
-                </div>
-                <NumberFormat
-                  value={6006930.31}
-                  displayType="text"
-                  thousandSeparator={true}
-                  prefix={'$'}
-                  style={{
-                    fontSize: '24px',
-                    fontStyle: 'normal',
-                    fontWeight: 700,
-                    textShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
-                    color: '#F9FAFB'
+                </Typography>
+                <Typography
+                  fontSize="24px"
+                  fontStyle="normal"
+                  fontWeight="bold"
+                  sx={{
+                    textShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)'
                   }}
-                />
+                  color="#F9FAFB"
+                >
+                  <NumberFormat
+                    value={6006930.31}
+                    displayType="text"
+                    thousandSeparator={true}
+                    prefix={'$'}
+                  />
+                </Typography>
               </Stack>
               <Stack alignItems="flex-start">
-                <div
-                  style={{
-                    fontSize: '16px',
-                    fontWeight: 500,
-                    fontStyle: 'normal',
-                    color: '#F9FAFB'
-                  }}
+                <Typography
+                  fontSize="16px"
+                  fontWeight="500px"
+                  fontStyle="normal"
+                  color="#F9FAFB"
                 >
                   Total Investment Value
-                </div>
-                <NumberFormat
-                  value={500}
-                  displayType="text"
-                  thousandSeparator={true}
-                  prefix={'$'}
-                  style={{
-                    fontSize: '24px',
-                    fontStyle: 'normal',
-                    fontWeight: 700,
-                    textShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
-                    color: '#F9FAFB'
+                </Typography>
+                <Typography
+                  fontSize="24px"
+                  fontStyle="normal"
+                  fontWeight="bold"
+                  sx={{
+                    textShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)'
                   }}
-                />
+                  color="#F9FAFB"
+                >
+                  <NumberFormat
+                    value={500}
+                    displayType="text"
+                    thousandSeparator={true}
+                    prefix={'$'}
+                  />
+                </Typography>
               </Stack>
             </Stack>
           </Stack>
         </Stack>
         <Stack
-          style={{ width: '158px', height: '182px', borderRadius: 16 }}
+          // style={{ width: '158px', height: '182px', borderRadius: 16 }}
           className="blockWallet"
           padding="15px"
           spacing="15px"
+          height="182px"
+          width="158px"
         >
-          <Box width="133px" height="44px">
-            <div
-              style={{ fontSize: '14px', fontWeight: 500, fontStyle: 'normal' }}
-            >
-              Your SIMPLI Wallet Balance
-            </div>
-          </Box>
+          <Typography
+            fontSize="14px"
+            fontWeight="500px"
+            fontStyle="normal"
+            color="#F9FAFB"
+          >
+            Your SIMPLI Wallet Balance
+          </Typography>
+
           <Box width="100%" height="37px">
-            <div
-              style={{
-                fontSize: '16px',
-                fontWeight: 500,
-                fontStyle: 'normal',
-                color: '#6CFFD3'
-              }}
-            >
-              <NumberFormat
-                value={1.01}
-                displayType={'text'}
-                thousandSeparator={true}
-              />
-            </div>
-            <div
-              style={{
-                fontSize: '10px',
-                fontWeight: 'normal',
-                fontStyle: 'normal',
-                color: '#F9FAFB'
-              }}
+            <Stack direction="row" spacing="10px">
+              <Typography
+                fontSize="16px"
+                fontWeight="500px"
+                fontStyle="normal"
+                color="#6CFFD3"
+              >
+                <NumberFormat
+                  value={price}
+                  displayType={'text'}
+                  thousandSeparator={true}
+                />
+              </Typography>
+              <Typography
+                fontSize="16px"
+                fontWeight="500px"
+                fontStyle="normal"
+                color="#6CFFD3"
+              >
+                $SIMPLI
+              </Typography>
+            </Stack>
+            <Typography
+              fontSize="10px"
+              fontWeight="normal"
+              fontStyle="normal"
+              color="#F9FAFB"
             >
               $ 0.0
-            </div>
+            </Typography>
           </Box>
           <Stack width="100%" height="32px">
-            <div
-              style={{
-                fontSize: '12px',
-                fontWeight: 'normal',
-                fontStyle: 'normal',
-                color: '#F9FAFB'
-              }}
+            <Typography
+              fontSize="12px"
+              fontWeight="normal"
+              fontStyle="normal"
+              color="#F9FAFB"
             >
               SIMPLI Tokens
-            </div>
+            </Typography>
             <Stack direction="row" justifyContent="space-between">
-              <img
-                src={fileicon}
-                style={{ height: '25px', width: '15px' }}
-                alt="fileicon"
-              />
-              <img
-                src={metamask}
-                style={{ height: '25px', width: '25px' }}
-                alt="metamask"
-              />
+              <IconButton aria-label="fileicon" size="medium">
+                <img
+                  src={fileicon}
+                  style={{ height: '25px', width: '15px' }}
+                  alt="fileicon"
+                />
+              </IconButton>
+              <IconButton aria-label="fileicon" size="medium">
+                <img
+                  src={metamask}
+                  style={{ height: '25px', width: '25px' }}
+                  alt="metamask"
+                />
+              </IconButton>
             </Stack>
           </Stack>
         </Stack>
         <Stack
-          style={{ width: '158px', height: '182px', borderRadius: 16 }}
+          height="182px"
+          width="158px"
+          borderRadius="16px"
           className="blockWallet"
           spacing="20px"
           padding="15px"
         >
           <Box width="133px" height="44px">
-            <div
-              style={{ fontSize: '14px', fontWeight: 500, fontStyle: 'normal' }}
+            <Typography
+              fontSize="14px"
+              fontWeight="50px"
+              fontStyle="normal"
+              color="#F9FAFB"
             >
               SIMPLI Token
-            </div>
-            <Stack direction="row">
+            </Typography>
+            <Stack direction="row" spacing="10px">
               <img
                 src={iconsimpli}
                 style={{ width: '15px', height: '15px' }}
-                alt="iconsimpli"
+                alt="Simpli"
               />
-              <div
-                style={{
-                  fontSize: '12px',
-                  fontWeight: 400,
-                  fontStyle: 'normal'
-                }}
+              <Typography
+                fontSize="12px"
+                fontWeight="400px"
+                fontStyle="normal"
+                color="#C4CDD5"
               >
                 $SIMPLI / UST
-              </div>
+              </Typography>
             </Stack>
           </Box>
           <Box width="93px" height="37px">
@@ -337,38 +325,53 @@ const YourPosition: React.FunctionComponent<PositionPageProps> = (props) => {
           </Box>
         </Stack>
         <Stack
-          style={{ width: '158px', height: '182px', borderRadius: 16 }}
+          width="158px"
+          height="182px"
           className="blockWallet"
           padding="15px"
           spacing="16px"
         >
           <Box width="133px" height="44px">
-            <div
-              style={{ fontSize: '14px', fontWeight: 500, fontStyle: 'normal' }}
+            <Typography
+              sx={{
+                fontSize: '14px',
+                fontWeight: '500px',
+                fontStyle: 'normal',
+                color: '#F9FAFB'
+              }}
             >
-              SIMPLI earned:{' '}
-            </div>
+              SIMPLI earned:
+            </Typography>
           </Box>
           <Box width="100%" height="37px">
-            <Stack
-              style={{
-                fontSize: '16px',
-                fontWeight: 500,
-                fontStyle: 'normal',
-                color: '#6CFFD3'
-              }}
-              direction="row"
-              spacing={1}
-            >
-              <NumberFormat
-                value={1.01}
-                displayType={'text'}
-                thousandSeparator={true}
-              />
-              <div>$SIMPLI</div>
+            <Stack direction="row" spacing={1}>
+              <Typography
+                sx={{
+                  fontSize: '16px',
+                  fontWeight: 500,
+                  fontStyle: 'normal',
+                  color: '#6CFFD3'
+                }}
+              >
+                <NumberFormat
+                  value={1.01}
+                  displayType={'text'}
+                  thousandSeparator={true}
+                />
+              </Typography>
+              <Typography
+                sx={{
+                  fontSize: '16px',
+                  fontWeight: 500,
+                  fontStyle: 'normal',
+                  color: '#6CFFD3'
+                }}
+              >
+                $SIMPLI
+              </Typography>
             </Stack>
-            <div
-              style={{
+            <Typography
+              sx={{
                 fontSize: '10px',
                 fontWeight: '400',
                 fontStyle: 'normal',
@@ -377,7 +380,7 @@ const YourPosition: React.FunctionComponent<PositionPageProps> = (props) => {
               }}
             >
               $ 0.0
-            </div>
+            </Typography>
             <ClaimButton />
           </Box>
         </Stack>
@@ -408,6 +411,7 @@ const YourPosition: React.FunctionComponent<PositionPageProps> = (props) => {
             alignItems="center"
             justifyContent="center"
             borderRadius="100%"
+            color="white"
           >
             Donut Chart
           </Stack>

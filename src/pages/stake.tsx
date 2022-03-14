@@ -18,7 +18,7 @@ const Stake: React.FC<StakePageProps> = () => {
   };
   return (
     <header className="stake-header">
-      <Typography fontSize="32px" fontWeight={700} fontStyle="normal">
+      <Typography fontSize="32px" fontWeight={700} fontStyle="normal" color='#FFFFFF'>
         Maximize yield by Staking $SIMPLI
       </Typography>
       <Stack direction="row">

@@ -70,6 +70,7 @@ export default function CustomizedAccordions() {
                     fontSize="10px"
                     fontWeight="normal"
                     fontStyle="normal"
+                    color='#FFFFFF'
                   >
                     ETH-BTCB
                   </Typography>
@@ -78,6 +79,7 @@ export default function CustomizedAccordions() {
                     fontSize="13px"
                     fontWeight="normal"
                     fontStyle="normal"
+                    color='#FFFFFF'
                   >
                     Pancake
                   </Typography>
@@ -89,6 +91,7 @@ export default function CustomizedAccordions() {
                   fontSize="13px"
                   fontWeight="normal"
                   fontStyle="normal"
+                  color='#FFFFFF'
                 >
                   $684.727
                 </Typography>
@@ -99,6 +102,7 @@ export default function CustomizedAccordions() {
                   fontSize="13px"
                   fontWeight="normal"
                   fontStyle="normal"
+                  color='#FFFFFF'
                 >
                   10950.13825867
                 </Typography>
@@ -109,6 +113,7 @@ export default function CustomizedAccordions() {
                   fontSize="13px"
                   fontWeight="normal"
                   fontStyle="normal"
+                  color='#FFFFFF'
                 >
                   $684.727
                 </Typography>
@@ -119,6 +124,7 @@ export default function CustomizedAccordions() {
                   fontSize="13px"
                   fontWeight="normal"
                   fontStyle="normal"
+                  color='#FFFFFF'
                 >
                   43.87%
                 </Typography>
@@ -129,6 +135,7 @@ export default function CustomizedAccordions() {
                   fontSize="13px"
                   fontWeight="normal"
                   fontStyle="normal"
+                  color='#FFFFFF'
                 >
                   117.41%
                 </Typography>
@@ -155,6 +162,7 @@ export default function CustomizedAccordions() {
                     fontSize="12px"
                     fontStyle="normal"
                     fontWeight="normal"
+                    color='#FFFFFF'
                   >
                     SIMPLI Earned
                     <div>
@@ -162,6 +170,7 @@ export default function CustomizedAccordions() {
                         fontSize="16px"
                         fontStyle="normal"
                         fontWeight={500}
+                        color='#FFFFFF'
                       >
                         1.180084
                       </Typography>
@@ -187,6 +196,7 @@ export default function CustomizedAccordions() {
                     fontSize="12px"
                     fontStyle="normal"
                     fontWeight="normal"
+                    color='#FFFFFF'
                   >
                     LP Staked
                     <div>
@@ -194,6 +204,7 @@ export default function CustomizedAccordions() {
                         fontSize="16px"
                         fontStyle="normal"
                         fontWeight={500}
+                        color='#FFFFFF'
                       >
                         1.180084
                       </Typography>
@@ -237,6 +248,7 @@ export default function CustomizedAccordions() {
                     fontSize="10px"
                     fontWeight="normal"
                     fontStyle="normal"
+                    color='#FFFFFF'
                   >
                     ETH-BTCB
                   </Typography>
@@ -245,6 +257,7 @@ export default function CustomizedAccordions() {
                     fontSize="13px"
                     fontWeight="normal"
                     fontStyle="normal"
+                    color='#FFFFFF'
                   >
                     Pancake
                   </Typography>
@@ -256,6 +269,7 @@ export default function CustomizedAccordions() {
                   fontSize="13px"
                   fontWeight="normal"
                   fontStyle="normal"
+                  color='#FFFFFF'
                 >
                   $684.727
                 </Typography>
@@ -266,6 +280,7 @@ export default function CustomizedAccordions() {
                   fontSize="13px"
                   fontWeight="normal"
                   fontStyle="normal"
+                  color='#FFFFFF'
                 >
                   10950.13825867
                 </Typography>
@@ -276,6 +291,7 @@ export default function CustomizedAccordions() {
                   fontSize="13px"
                   fontWeight="normal"
                   fontStyle="normal"
+                  color='#FFFFFF'
                 >
                   $684.727
                 </Typography>
@@ -286,6 +302,7 @@ export default function CustomizedAccordions() {
                   fontSize="13px"
                   fontWeight="normal"
                   fontStyle="normal"
+                  color='#FFFFFF'
                 >
                   43.87%
                 </Typography>
@@ -296,6 +313,7 @@ export default function CustomizedAccordions() {
                   fontSize="13px"
                   fontWeight="normal"
                   fontStyle="normal"
+                  color='#FFFFFF'
                 >
                   117.41%
                 </Typography>
@@ -322,6 +340,7 @@ export default function CustomizedAccordions() {
                     fontSize="12px"
                     fontStyle="normal"
                     fontWeight="normal"
+                    color='#FFFFFF'
                   >
                     SIMPLI Earned
                     <div>
@@ -329,6 +348,7 @@ export default function CustomizedAccordions() {
                         fontSize="16px"
                         fontStyle="normal"
                         fontWeight={500}
+                        color='#FFFFFF'
                       >
                         1.180084
                       </Typography>
@@ -354,6 +374,7 @@ export default function CustomizedAccordions() {
                     fontSize="12px"
                     fontStyle="normal"
                     fontWeight="normal"
+                    color='#FFFFFF'
                   >
                     LP Staked
                     <div>
@@ -361,6 +382,7 @@ export default function CustomizedAccordions() {
                         fontSize="16px"
                         fontStyle="normal"
                         fontWeight={500}
+                        color='#FFFFFF'
                       >
                         1.180084
                       </Typography>
