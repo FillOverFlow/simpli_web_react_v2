@@ -4,20 +4,23 @@ import {
   ConnectWallet2
 } from '@/components/layout/button';
 import { Box, Stack, Typography, Link } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import iconsimpli from '../assets/iconsimpli.png';
 import './style.css';
+import * as Swal from '@/utils/sweetalert'
 import StakeAPI from '@/apis/stake'
 import { useGetBalanceOfSIMPLI } from '@/hooks/simpliToken';
 import { useEthers, useTokenBalance } from '@usedapp/core';
 import { formatUnits, formatEther } from '@ethersproject/units'
 import { weiToEther } from '@/utils/web3';
+import DialogLoading from '@/components/modal/DialogLoading';
+import ReactDOMServer from 'react-dom/server';
 
 export interface StakePageProps {}
 
 const Stake: React.FC<StakePageProps> = () => {
   const [stakeType, setStakeType] = useState('stake')
-  const [stakeAPR , setStakeAPR] = useState('3.61')
+  const [stakeAPR , setStakeAPR] = useState<string | undefined>('3.61')
   const { account } = useEthers();
   const walletAddress = account
   const walletConnected = account ? true : false
@@ -31,23 +34,36 @@ const Stake: React.FC<StakePageProps> = () => {
    */
 
   const simpliTokenAddress = import.meta.env.VITE_SIMPLI_TOKEN_ADDRESS as string
-  const stakingAddress = import.meta.env.SIMPLI_STEAKING_ADDRESS as string
   const balanceSIMPLI = useTokenBalance(simpliTokenAddress, walletAddress)
-
-
 
   /** END  */
   const callStakingAPI = async() => {
-    try {
-      const stakeAPR = await StakeAPI.stakingAPR()
-      stakeAPR && setStakeAPR(stakeAPR)
-    }catch(e){
-      console.error('in stakePage Error load StakeAPR', e)
-    }
+    Swal.SwalLoading({
+        customClass: { 
+          ...Swal.defaultOptions.customClass,
+          title: 'swal-stake-title',
+          popup: 'swal-stake-popup'
+        },
+        titleText: '',
+        html: ReactDOMServer.renderToStaticMarkup(<DialogLoading 
+					label={'label'} 
+					labelLeft={'labelLeft'} 
+					valueLeft={2}/>),
+        showCloseButton: true
+    })
+    // try { 
+    //   const stakeAPR = await StakeAPI.stakingAPR()
+    //   setStakeAPR(stakeAPR)
+    //   Swal.SwalClose()
+    // }catch(e){
+    //   await Swal.SwalError({
+    //     text: (e as any )?.message as string
+    //   })
+    // }
   }
 
   useEffect(() =>{
-    // callStakingAPI()
+    callStakingAPI()
   },[])
   
   return (

@@ -9,6 +9,9 @@ import { Box } from '@mui/system';
 import { LogoFooter } from './components/footer/footer';
 import { AuditByComponent } from './components/layout/auditlogo';
 import { SocialMediaComponent } from './components/layout/socialmedia';
+// import Swal from 'sweetalert2/dist/sweetalert2.js'
+
+import 'sweetalert2/dist/sweetalert2.css'
 
 const config: Config = {
   readOnlyChainId: Mainnet.chainId,
