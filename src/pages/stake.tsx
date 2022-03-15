@@ -2,30 +2,34 @@ import {
   StakeButton,
   UnStakeButton,
   ConnectWallet2,
-  ButtonEx
+  ButtonEx,
+  ButtonBase
 } from '@/components/layout/button';
 import { Box, Stack, Typography, Link } from '@mui/material';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import iconsimpli from '../assets/iconsimpli.png';
 import './style.css';
 import * as Swal from '@/utils/sweetalert'
 import StakeAPI from '@/apis/stake'
-import { useGetBalanceOfSIMPLI } from '@/hooks/simpliToken';
 import { useEthers, useTokenBalance } from '@usedapp/core';
-import { formatUnits, formatEther } from '@ethersproject/units'
-import { weiToEther } from '@/utils/web3';
+import { displayWeiToEther, weiToFloat , etherToWei, weiToEther} from '@/utils/web3';
 import DialogLoading from '@/components/modal/DialogLoading';
 import ReactDOMServer from 'react-dom/server';
+import { useStaking, useTotalSupply, useUnStaking } from '@/hooks/staking';
+import { useAllowance, useApprove, useGetBalanceOfSIMPLI } from '@/hooks/simpliToken';
+import { ethers } from 'ethers' 
+
 
 export interface StakePageProps {}
 
 const Stake: React.FC<StakePageProps> = () => {
   const [stakeType, setStakeType] = useState('stake')
   const [stakeAPR , setStakeAPR] = useState<string | undefined>('3.61')
+  const [amount, setAmount] = useState('0')
+  const [userPressMax, setUserPressMax] = useState(false)
   const { account } = useEthers();
   const walletAddress = account
   const walletConnected = account ? true : false
-  const address = import.meta.env.VITE_SMARTCONTACT_ADDRESS
   const _handleClickStake = (e: React.MouseEvent, title: string) => {
     setStakeType(title);
   };
@@ -33,28 +37,86 @@ const Stake: React.FC<StakePageProps> = () => {
   /**
    * START SMART CONTRACT for STAKE 
    */
+    console.log('handle aprrove ')
 
   const simpliTokenAddress = import.meta.env.VITE_SIMPLI_TOKEN_ADDRESS as string
+  const xsimpliTokenAddress = import.meta.env.VITE_SIMPLI_STEAKING_ADDRESS as string
+  const allowance = useAllowance(walletAddress,xsimpliTokenAddress)
   const balanceSIMPLI = useTokenBalance(simpliTokenAddress, walletAddress)
+  const balanceXSIMPLI = useTokenBalance(xsimpliTokenAddress, walletAddress)
+  const balanceSIMPLIStaking = useGetBalanceOfSIMPLI(xsimpliTokenAddress)
+  const totalSupplyXSIMPLI = useTotalSupply()
+  const { state: stakeTokenState, send: stakeToken } = useStaking()
+  const { state: unstakeTokenState, send: unstakeToken } = useUnStaking()
+  const { state: approveState , send: approve } = useApprove()
+  
+  const shouldApprove = () => {
+      const showstakeCondition = (+displayWeiToEther(allowance) >= +amount) 
+      return amount ? (!showstakeCondition) : true
+  }
+  const rate = () => {
+    if(totalSupplyXSIMPLI && balanceSIMPLIStaking){
+      const totalSupplyFloat = weiToFloat(totalSupplyXSIMPLI)
+      const balanceSIMPLIStakeingFloat = weiToFloat(balanceSIMPLIStaking)
+      return balanceSIMPLIStakeingFloat / totalSupplyFloat
+    }else{
+      return 1
+    }
+    
+  }
 
   /** END  */
+  const handleApprove = () => {
+    const maxEtherValueConstant = ethers.constants.MaxInt256
+    approve(xsimpliTokenAddress,maxEtherValueConstant)
+  }
+  const handleStake = () => {
+    const weiAmount = userPressMax ? balanceSIMPLI : etherToWei(amount)
+    openLoading()
+    stakeToken(weiAmount)
+  }
+  const handleUnStake = () => {
+    const weiAmount = userPressMax ? balanceXSIMPLI : etherToWei(amount)
+    openLoading()
+    unstakeToken(weiAmount)
+  } 
+  const openLoading = () => {
+    const label = (stakeType == 'stake') ? 'Stake' : 'UnStake'
+    const labelLeft = 'SIMPLI'
+    const valueLeft = amount
+    Swal.SwalLoading({
+        titleText: label,
+        html: ReactDOMServer.renderToStaticMarkup(<DialogLoading 
+					label={label} 
+					labelLeft={labelLeft} 
+					valueLeft={valueLeft}/>),
+        showCloseButton: true
+    })
+  }
+  const getMaxStakeOrUnStake = () => {
+    if(balanceSIMPLI && balanceXSIMPLI){
+      const balanceSIMPLIFloat = displayWeiToEther(balanceSIMPLI) + ''
+      const balanceXSIMPLIFloat = displayWeiToEther(balanceXSIMPLI) + ''
+      const maxValue = (stakeType == 'stake') ? balanceSIMPLIFloat : balanceXSIMPLIFloat
+      setAmount(maxValue)
+      setUserPressMax(true)
+    }else{
+      console.log('wait for smartcontract data')
+    }
+  }
   const callStakingAPI = async() => {
     Swal.SwalLoading({
-        customClass: { 
-          ...Swal.defaultOptions.customClass,
-          title: 'swal-stake-title',
-          popup: 'swal-stake-popup'
-        },
-        titleText: '',
+        titleText: 'Some Title',
         html: ReactDOMServer.renderToStaticMarkup(<DialogLoading 
 					label={'label'} 
 					labelLeft={'labelLeft'} 
-					valueLeft={2}/>),
+					valueLeft={'valueLeft'}/>),
         showCloseButton: true
     })
     try { 
       const stakeAPR = await StakeAPI.stakingAPR()
-      setStakeAPR(stakeAPR)
+      // setStakeAPR(stakeAPR)
+      setStakeAPR('40')
       Swal.SwalClose()
     }catch(e){
       await Swal.SwalError({
@@ -63,10 +125,88 @@ const Stake: React.FC<StakePageProps> = () => {
     }
   }
 
-  useEffect(() =>{
-    callStakingAPI()
-  },[])
+  /** START UseEffect State Handle */
+
+  //Stake State
+  useEffect(() => {
+			const { status , transaction } = stakeTokenState;
+			console.log('stake token state ', status)
+			if(status == 'Exception'){
+				Swal.SwalError({
+					titleText: 'Failed',
+					text: stakeTokenState.errorMessage?.toLowerCase(),
+					
+				})
+			}
+			if(status == 'Success'){
+				const bscLink = process.env.REACT_APP_BSC_LINK? process.env.REACT_APP_BSC_LINK + transaction?.hash: ''
+				void Swal.SwalClose();
+				void Swal.SwalPopup({
+          titleText: 'Success',
+					customClass: {
+						...Swal.defaultOptions.customClass,
+						title: 'swal-approve-modal-title',
+						closeButton: 'swal-approve-close-btn',
+						confirmButton: 'swal-approve-confirm-btn',
+					},
+					confirmButtonText: 'OK',
+					// html: ReactDOMServer.renderToStaticMarkup(
+					// 	<SuccessModal link={bscLink} valueLeft={simpli+''}  valueRight={xsimpli+''}/>
+					// ),
+					timer: 5000,
+				})
+				setAmount('')
+			}
+		},[stakeTokenState])
+
+    //UnStake State
+    useEffect(() => {
+			const { status , transaction } = unstakeTokenState;
+			console.log('unstake token state ', status)
+			if(status == 'Exception'){
+				Swal.SwalError({
+					titleText: 'Failed',
+					text: unstakeTokenState.errorMessage?.toLowerCase(),
+					
+				})
+			}
+			if(status == 'Success'){
+				const bscLink = process.env.REACT_APP_BSC_LINK? process.env.REACT_APP_BSC_LINK + transaction?.hash: ''
+				void Swal.SwalClose();
+				void Swal.SwalPopup({
+          titleText: "Unstake Token",
+					customClass: {
+						...Swal.defaultOptions.customClass,
+						title: 'swal-approve-modal-title',
+						closeButton: 'swal-approve-close-btn',
+						confirmButton: 'swal-approve-confirm-btn',
+					},
+					confirmButtonText: 'OK',
+					// html: ReactDOMServer.renderToStaticMarkup(
+					// 	<SuccessModal label={'Unstake'} link={bscLink} labelLeft='xSIMPLI' labelRight='SIMPLI' valueLeft={xsimpli+''} valueRight={simpli+''} />
+					// ),
+					timer: 5000,
+				})
+				setAmount('')
+			}
+		},[unstakeTokenState])
+
+    //Approve State
+    useEffect(() => {
+			const { status , transaction } = approveState;
+			if(status == 'Exception'){
+				Swal.SwalError({
+					titleText: 'Failed',
+					text: approveState.errorMessage?.toLowerCase()
+				})
+			}
+		})
   
+  useEffect(() =>{
+    // callStakingAPI()
+  },[])
+
+  /** End UseEffect  */
   return (
     <header className="stake-header">
       <Typography
@@ -79,7 +219,8 @@ const Stake: React.FC<StakePageProps> = () => {
       </Typography>
       <Stack direction="row">
         <Box>
-          <h3>smartContract ENV Address : {address}</h3>
+          <h3>totalSupply staking Address : {displayWeiToEther(totalSupplyXSIMPLI)} </h3>
+          <h3>balanceSIMPLIStaking  : {displayWeiToEther(balanceSIMPLIStaking)} </h3>
         </Box>
       </Stack>
       <Stack direction="row">
@@ -149,7 +290,7 @@ const Stake: React.FC<StakePageProps> = () => {
                   fontStyle="normal"
                   color="#F9FAFB"
                 >
-                  Stake
+                  {(stakeType=='stake') ? 'Stake' : 'UnStake'}
                 </Typography>
                 <Stack className="stake-rate" direction="row">
                   <Typography
@@ -172,7 +313,7 @@ const Stake: React.FC<StakePageProps> = () => {
                     />
                     <div>xSIMPLI = </div>
                     <Box width={2} />
-                    <div>1.002269925650048</div>
+                    <div>{rate()}</div>
                     <Box width={2} />
                     <img
                       src={iconsimpli}
@@ -205,7 +346,7 @@ const Stake: React.FC<StakePageProps> = () => {
                   flexDirection="row"
                   textAlign="center"
                 >
-                  <div>0</div>
+                  <div>{amount}</div>
                   <Box width={8} />
                   <img
                     src={iconsimpli}
@@ -235,13 +376,13 @@ const Stake: React.FC<StakePageProps> = () => {
                   >
                     <div>Balance :</div>
                     <Box width="10px" />
-                    <div>{balanceSIMPLI && formatUnits(balanceSIMPLI)}</div>
+                    <div>{(stakeType == 'stake') ?  displayWeiToEther(balanceSIMPLI) : displayWeiToEther(balanceXSIMPLI)}</div>
                   </Typography>
                   <Box width="24px" />
                   <Link
                     component="button"
                     variant="body2"
-                    onClick={() => {}}
+                    onClick={getMaxStakeOrUnStake}
                     fontSize="16px"
                     fontWeight={400}
                     fontStyle="normal"
@@ -253,7 +394,10 @@ const Stake: React.FC<StakePageProps> = () => {
               </Stack>
               {
                 walletConnected ? 
-                  (stakeType == 'stake') ? ButtonEx('stake') : ButtonEx('unstake')
+                  shouldApprove()? <ButtonBase title={'Approve'} onClick={handleApprove}/>:
+                  (stakeType == 'stake') ? 
+                  <ButtonBase title={'Stake'} onClick={handleStake}/> : 
+                  <ButtonBase title={'UnStake' } onClick={handleUnStake}/>
                 :
                 <ConnectWallet2/>
             }
@@ -293,7 +437,7 @@ const Stake: React.FC<StakePageProps> = () => {
                     fontStyle="normal"
                     color="#6CFFD3"
                   >
-                    0.0
+                    {displayWeiToEther(balanceXSIMPLI,10)}
                   </Typography>
                 </Stack>
               </Stack>
@@ -328,7 +472,7 @@ const Stake: React.FC<StakePageProps> = () => {
                     fontStyle="normal"
                     color="#6CFFD3"
                   >
-                  {balanceSIMPLI && weiToEther(balanceSIMPLI,10)}
+                  {displayWeiToEther(balanceSIMPLI,10)}
                   </Typography>
                 </Stack>
               </Stack>

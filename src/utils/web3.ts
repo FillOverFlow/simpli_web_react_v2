@@ -1,4 +1,4 @@
-import { formatUnits } from '@ethersproject/units'
+import { formatUnits, parseEther } from '@ethersproject/units'
 
 export const truncate = (str: string, showFrontDigits=3, showRearDigits=3) => {
     return (str.length > showFrontDigits + showRearDigits) ? str.substr(0, showFrontDigits-1) + '...' + str.slice(-showRearDigits) : str;
@@ -20,3 +20,16 @@ export const weiToEther = (value : any, showDigits=8) => {
     const EtherTruncateString = truncateFloat(EtherString,showDigits)
     return EtherTruncateString
 }
+
+export const etherToWei = (value : string) => {
+    return parseEther(value)
+}
+
+export const weiToFloat = (value : any ,showDigits=21) => {
+    return +weiToEther(value,showDigits)
+}
+
+export const displayWeiToEther = (value : any , showDigits=21) => {
+    return value ? weiToEther(value,showDigits) : 0.0
+}
+

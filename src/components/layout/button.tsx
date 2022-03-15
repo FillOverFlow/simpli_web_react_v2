@@ -159,7 +159,32 @@ const WithdrawB = styled(Button)({
   borderWidth: 1,
   borderColor: ' #6CFFD3',
   textTransform: 'none'
-});
+})
+
+interface IButton {
+  title? : string 
+  onClick?: () => any
+}
+
+export const ButtonBase = ({title='Button', onClick } : IButton) => {
+  return (
+    <WithdrawB  onClick={onClick} aria-label="bx" variant="outlined">
+      <Typography
+        alignItems="center"
+        justifyContent="center"
+        sx={{
+          color: '#6CFFD3',
+          fontSize: '13px',
+          textAlign: 'center',
+          fontStyle: 'normal',
+          fontWeight: 700
+        }}
+      >
+        {title}
+      </Typography>
+    </WithdrawB>
+  );
+};
 
 export const ButtonEx = (title: string) => {
   return (

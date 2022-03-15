@@ -125,7 +125,7 @@ export default css`
   }
 
   .swal-stake-popup {
-    padding: 60px 120px !important;
+    /* padding: 60px 120px !important;
     background-color: ${colors.MODAL_COLOR} !important;
     color: ${colors.WHITE} !important;
     border-radius: 20px !important;
@@ -136,10 +136,10 @@ export default css`
 
     @media (max-width: ${768}px) {
       padding: 78px 38px !important;
-    }
+    } */
   }
 
   .swal-stake-title {
-    padding-top: 16rem !important;
+    /* padding-top: 16rem !important; */
   }
 `;

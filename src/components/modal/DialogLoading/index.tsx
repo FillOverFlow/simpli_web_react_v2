@@ -1,15 +1,14 @@
-import React from 'react';
 import { Container } from './css'
 
 interface IProps {
   label?: string
   labelLeft?: string
   labelRight?:string 
-  valueLeft?: number
-  valueRight?: number
+  valueLeft?: string
+  valueRight?: string
 
 }
-export default ({ labelLeft='SIMPLI', labelRight='xSIMPLI'  , label='Staking' , valueLeft=0, valueRight=0}: IProps) => { 
+export default ({ labelLeft='SIMPLI', labelRight='xSIMPLI'  , label='Staking' , valueLeft='0', valueRight='0'}: IProps) => { 
 
     return (
     <Container>
