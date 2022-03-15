@@ -85,6 +85,11 @@ const Stake: React.FC<StakePageProps> = () => {
     const labelLeft = 'SIMPLI'
     const valueLeft = amount
     Swal.SwalLoading({
+        customClass: {
+					...Swal.defaultOptions.customClass,
+					title: 'swal-stake-title',
+					popup: 'swal-stake-popup',
+				},
         titleText: label,
         html: ReactDOMServer.renderToStaticMarkup(<DialogLoading 
 					label={label} 
