@@ -37,7 +37,6 @@ const Stake: React.FC<StakePageProps> = () => {
   /**
    * START SMART CONTRACT for STAKE 
    */
-    console.log('handle aprrove ')
 
   const simpliTokenAddress = import.meta.env.VITE_SIMPLI_TOKEN_ADDRESS as string
   const xsimpliTokenAddress = import.meta.env.VITE_SIMPLI_STEAKING_ADDRESS as string
@@ -139,7 +138,8 @@ const Stake: React.FC<StakePageProps> = () => {
 				})
 			}
 			if(status == 'Success'){
-				const bscLink = process.env.REACT_APP_BSC_LINK? process.env.REACT_APP_BSC_LINK + transaction?.hash: ''
+        const transactionHash  = transaction ? transaction.hash : ''
+				const bscLink = import.meta.env.VITE_BSC_LINK + transactionHash
 				void Swal.SwalClose();
 				void Swal.SwalPopup({
           titleText: 'Success',
@@ -171,7 +171,8 @@ const Stake: React.FC<StakePageProps> = () => {
 				})
 			}
 			if(status == 'Success'){
-				const bscLink = process.env.REACT_APP_BSC_LINK? process.env.REACT_APP_BSC_LINK + transaction?.hash: ''
+        const transactionHash  = transaction ? transaction.hash : ''
+				const bscLink = import.meta.env.VITE_BSC_LINK + transactionHash
 				void Swal.SwalClose();
 				void Swal.SwalPopup({
           titleText: "Unstake Token",
