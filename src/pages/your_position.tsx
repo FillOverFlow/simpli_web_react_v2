@@ -1,23 +1,25 @@
 import { Box, Stack, Typography, IconButton } from '@mui/material';
+import * as React from 'react';
+import { useEffect, useState } from 'react';
 
 import detaillogo from '../assets/detaillogo.png';
 import fileicon from '../assets/fileicon.svg';
 import metamask from '../assets/metamask.svg';
 import iconsimpli from '../assets/iconsimpli.png';
-
 import arrow from '../assets/arrow.svg';
 
 import './style.css';
 import NumberFormat from 'react-number-format';
 import { ClaimButton } from '@/components/layout/button';
 
-import * as React from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import UnstyledSelectSimple from '@/components/layout/selectBox';
 
 import CustomizedAccordions from '@/components/layout/accordion';
+import { useEthers, useTokenBalance } from '@usedapp/core';
+import YouPositionAPi, { tvlData }  from '@/apis/you_position';
 
 export interface PositionPageProps {}
 
@@ -82,6 +84,31 @@ const SelectionMenu = () => {
 const YourPosition: React.FunctionComponent<PositionPageProps> = (props) => {
   let price: number = 1.03;
   let price2: number = 2.0;
+  const { account } = useEthers()
+  const walletAddress = account
+  const simpliTokenAddress = import.meta.env.VITE_SIMPLI_TOKEN_ADDRESS as string
+
+
+  const getTVL = async () => {
+    const response =  await YouPositionAPi.getTotalTVLAPI()
+    const data  : tvlData[] = response ? JSON.parse(response) : '';
+    const dataTVL  = data.filter((item) => item.pid == -1)
+    const tvl: number = +dataTVL[0].tvl
+    setTVL(tvl)
+    console.log('tvl ', tvl)
+  }
+  
+  
+  //Start StmartContract 
+  const balanceSIMPLI = useTokenBalance(simpliTokenAddress, walletAddress)
+  const [tvl, setTVL] = useState(6006930.31)
+  const [totalInvest, setTotalInvest] = useState(500)
+
+  //End SmartContract
+
+  useEffect(() =>{
+    getTVL()
+  },[])
 
   return (
     <Box width="100%">
@@ -131,7 +158,7 @@ const YourPosition: React.FunctionComponent<PositionPageProps> = (props) => {
                   color="#F9FAFB"
                 >
                   <NumberFormat
-                    value={6006930.31}
+                    value={tvl}
                     displayType="text"
                     thousandSeparator={true}
                     prefix={'$'}
@@ -157,7 +184,7 @@ const YourPosition: React.FunctionComponent<PositionPageProps> = (props) => {
                   color="#F9FAFB"
                 >
                   <NumberFormat
-                    value={500}
+                    value={totalInvest}
                     displayType="text"
                     thousandSeparator={true}
                     prefix={'$'}
