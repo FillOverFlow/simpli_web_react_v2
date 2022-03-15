@@ -164,11 +164,12 @@ const WithdrawB = styled(Button)({
 interface IButton {
   title? : string 
   onClick?: () => any
+  disabled?: boolean
 }
 
-export const ButtonBase = ({title='Button', onClick } : IButton) => {
+export const ButtonBase = ({title='Button', onClick , disabled=false}: IButton) => {
   return (
-    <WithdrawB  onClick={onClick} aria-label="bx" variant="outlined">
+    <WithdrawB  onClick={onClick} disabled={disabled} aria-label="bx" variant="outlined">
       <Typography
         alignItems="center"
         justifyContent="center"

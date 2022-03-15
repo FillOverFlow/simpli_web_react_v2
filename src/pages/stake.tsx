@@ -30,6 +30,7 @@ const Stake: React.FC<StakePageProps> = () => {
   const { account } = useEthers();
   const walletAddress = account
   const walletConnected = account ? true : false
+  const shouldDisableStake = (+amount <= 0)
   const _handleClickStake = (e: React.MouseEvent, title: string) => {
     setStakeType(title);
   };
@@ -397,8 +398,8 @@ const Stake: React.FC<StakePageProps> = () => {
                 walletConnected ? 
                   shouldApprove()? <ButtonBase title={'Approve'} onClick={handleApprove}/>:
                   (stakeType == 'stake') ? 
-                  <ButtonBase title={'Stake'} onClick={handleStake}/> : 
-                  <ButtonBase title={'UnStake' } onClick={handleUnStake}/>
+                  <ButtonBase disabled={shouldDisableStake} title={'Stake'} onClick={handleStake}/> : 
+                  <ButtonBase disabled={shouldDisableStake} title={'UnStake' } onClick={handleUnStake}/>
                 :
                 <ConnectWallet2/>
             }
