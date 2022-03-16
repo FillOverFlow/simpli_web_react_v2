@@ -19,7 +19,11 @@ import UnstyledSelectSimple from '@/components/layout/selectBox';
 
 import CustomizedAccordions from '@/components/layout/accordion';
 import { useEthers, useTokenBalance } from '@usedapp/core';
-import YouPositionAPi, { DashboardData, tvlData }  from '@/apis/you_position';
+import YouPositionAPi, { DashboardData, FarmDataTable, tvlData }  from '@/apis/you_position';
+import { mergePoolDataWithTvl } from '@/utils';
+import { usePendingSIMPLIList, useStakedWantTokenList } from '@/hooks/simplichef';
+import { weiToFloat } from '@/utils/web3';
+
 
 export interface PositionPageProps {}
 
@@ -81,38 +85,77 @@ const SelectionMenu = () => {
   );
 };
 
+interface FarmDataFilterMerge extends DashboardData ,tvlData {
+  amountNumber : number
+  amountBigNumber : any
+}
+
 const YourPosition: React.FunctionComponent<PositionPageProps> = (props) => {
   let price: number = 1.03;
   let price2: number = 2.0;
+  const NUMBER_FILTER =  0.0001
   const { account } = useEthers()
   const walletAddress = account
   const simpliTokenAddress = import.meta.env.VITE_SIMPLI_TOKEN_ADDRESS as string
+  const [tvl, setTVL] = useState(0)
+  const [poolDataAndTVL , setPoolDataAndTVL] = useState<tvlData[]>()
   const [dashBoardData, setDashboardData] = useState<DashboardData[]>()
+  const dashBoardDataMerge = dashBoardData && poolDataAndTVL && mergePoolDataWithTvl(dashBoardData,poolDataAndTVL)
+  const pidList = dashBoardDataMerge ? dashBoardDataMerge.map((item) =>  item.pid) : []
 
+  //call check StakedWant from contract
+  const stakedWantTokenList = useStakedWantTokenList(pidList, walletAddress)
 
+  const dashBoardDataMapAmount = dashBoardDataMerge ? dashBoardDataMerge.map((item ,index) => {
+    const amountBigNumber = stakedWantTokenList[index]
+    const amountNumber = amountBigNumber && weiToFloat(amountBigNumber[0])
+    return {
+      ...item,
+      amountNumber: amountNumber,
+      amountBigNumber: amountBigNumber
+    }
+  }): []
+  const dashBoardDataFilter   = dashBoardDataMapAmount.filter((item) => (item.amountNumber >= NUMBER_FILTER))
+  
   const getTVL = async () => {
     const response =  await YouPositionAPi.getTotalTVLAPI()
     const data  : tvlData[] = response ? JSON.parse(response) : '';
     const dataTVL  = data.filter((item) => item.pid == -1)
     const tvl: number = +dataTVL[0].tvl
+    setPoolDataAndTVL(data)
     setTVL(tvl)
-    console.log('tvl ', tvl)
+    // console.log('tvl ', tvl)
   }
 
   const getDashboardData = async () => {
     const response = await YouPositionAPi.getDashboardAPI()
     const data : DashboardData[] = response ? JSON.parse(response): '';
     setDashboardData(data)
-    console.log('dashboard data ', data)
+    // console.log('dashboard data ', data)
   }
   
+
   
   //Start StmartContract 
+  const pidListFilter = dashBoardDataFilter.map((item) => item.pid)
   const balanceSIMPLI = useTokenBalance(simpliTokenAddress, walletAddress)
-  const [tvl, setTVL] = useState(6006930.31)
   const [totalInvest, setTotalInvest] = useState(500)
-
+  const pendingSIMPIList = usePendingSIMPLIList(pidListFilter,walletAddress)  
   //End SmartContract
+  
+  const updateFarmDataTable = (dashBoardDataFilter : FarmDataFilterMerge[])  => {
+    const farm  = dashBoardDataFilter.map((item,index)=> {
+      return {
+        ...item,
+        amountUSD : item.amountNumber * (+item.lp_value_usd),
+        simpliEarn : pendingSIMPIList[index]
+      }
+    })
+    console.log('FARM DATA ', farm)
+    return farm
+  }
+  const farmDataTable = updateFarmDataTable(dashBoardDataFilter)
+
 
   useEffect(() =>{
     getTVL()
@@ -168,7 +211,7 @@ const YourPosition: React.FunctionComponent<PositionPageProps> = (props) => {
                   color="#F9FAFB"
                 >
                   <NumberFormat
-                    value={tvl}
+                    value={tvl.toFixed(2)}
                     displayType="text"
                     thousandSeparator={true}
                     prefix={'$'}
@@ -491,7 +534,7 @@ const YourPosition: React.FunctionComponent<PositionPageProps> = (props) => {
                 fontStyle="normal"
                 color="#919EAB"
               >
-                Amount(%)
+                Amount($)
               </Typography>
               <Typography
                 fontSize="12px"
@@ -526,7 +569,7 @@ const YourPosition: React.FunctionComponent<PositionPageProps> = (props) => {
                 APR (SIMPLI)
               </Typography>
             </Stack>
-            <CustomizedAccordions dashBoardData={dashBoardData ? dashBoardData : []} />
+            <CustomizedAccordions dashBoardData={farmDataTable && farmDataTable} />
           </Stack>
         </Stack>
       </Stack>

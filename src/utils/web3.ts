@@ -1,8 +1,17 @@
-import { formatUnits, parseEther } from '@ethersproject/units'
+import { formatUnits, parseEther, formatEther } from '@ethersproject/units'
 
 export const truncate = (str: string, showFrontDigits=3, showRearDigits=3) => {
     return (str.length > showFrontDigits + showRearDigits) ? str.substr(0, showFrontDigits-1) + '...' + str.slice(-showRearDigits) : str;
 };
+
+export const avoidScienceNumberFormat = (num : number | string)  => {
+    return (''+ +num).replace(/(-?)(\d*)\.?(\d*)e([+-]\d+)/,
+    function(a,b,c,d,e) {
+    return e < 0
+        ? b + '0.' + Array(1-e-c.length).join('0') + c + d
+        : b + c + d + Array(e-d.length+1).join('0');
+    });
+}  
 
 export const truncateFloat = (str: string, showDigits=8) => {
     let result = str
@@ -19,6 +28,13 @@ export const weiToEther = (value : any, showDigits=8) => {
     const EtherString = formatUnits(value)
     const EtherTruncateString = truncateFloat(EtherString,showDigits)
     return EtherTruncateString
+}
+
+export const weiToEtherOld = (value : any, showDigits=8) => {
+    const EtherFloat = parseFloat(formatEther(value))
+    const EtherString = EtherFloat + ''
+    const EtherTruncateString = truncateFloat(EtherString,showDigits)
+    return avoidScienceNumberFormat(EtherTruncateString)
 }
 
 export const etherToWei = (value : string) => {

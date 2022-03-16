@@ -25,6 +25,12 @@ export default {
 export interface tvlData { 
   pid : number  
   tvl : string 
+  dailyAPR: string
+  weeklyAPR: string 
+  yearlyAPR: string
+  lp_value_usd: string
+  total_supply: string
+  
 }
 
 export interface DashboardData {
@@ -32,4 +38,21 @@ export interface DashboardData {
   address: string
   pid : number
   alloc_point : number 
+}
+
+export interface FarmDataTable  {
+  amountUSD: number;
+  simpliEarn: any[];
+  amountNumber: number;
+  amountBigNumber: any;
+  pool_name: string;
+  address: string;
+  pid: number;
+  alloc_point: number;
+  tvl: string;
+  dailyAPR: string;
+  weeklyAPR: string;
+  yearlyAPR: string;
+  lp_value_usd: string;
+  total_supply: string;
 }

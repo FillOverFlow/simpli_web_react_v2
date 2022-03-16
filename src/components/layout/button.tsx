@@ -6,6 +6,7 @@ import iconwallet_black from '../../assets/iconwallet_black.svg';
 import React from 'react';
 import { useEthers } from '@usedapp/core';
 import { truncate } from '@/utils/web3';
+import { useDeposit } from '@/hooks/simplichef';
 
 const ConnectWalletStyled = styled(Button)({
   backgroundColor: 'rgba(108, 255, 211, 0.16)',
@@ -134,9 +135,15 @@ const ClaimX = styled(Button)({
   textTransform: 'none'
 });
 
-export const ClaimB = () => {
+
+
+export const ClaimB = (props: IButton) => {
+  const { state: depositState, send: deposit } = useDeposit()
+  const handleClaim = (pid: number) => {
+    deposit(pid,0)
+  }
   return (
-    <ClaimX variant="contained" disableRipple>
+    <ClaimX variant="contained" onClick={() => handleClaim(props.pid)} disableRipple>
       <Typography
         sx={{
           color: '#204C3F',
@@ -162,7 +169,8 @@ const WithdrawB = styled(Button)({
 })
 
 interface IButton {
-  title? : string 
+  title? : string
+  pid? :number 
   onClick?: () => any
   disabled?: boolean
 }

@@ -9,10 +9,11 @@ import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import { Box, Divider, Stack } from '@mui/material';
 import ethbtc from '../../assets/eth-btc.svg';
-import { ButtonBase, ButtonEx, ClaimB } from './button';
+import { ButtonBase, ClaimB } from './button';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { DashboardData } from '@/apis/you_position';
-import { convertPoolName } from '@/utils';
+import { DashboardData, FarmDataTable, tvlData } from '@/apis/you_position';
+import { convertInternationalCurrentcy, convertPoolName } from '@/utils';
+import { displayWeiToEther } from '@/utils/web3';
 
 
 const Accordion = styled((props: AccordionProps) => (
@@ -35,7 +36,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }));
 
 interface ICustomizeProps { 
-  dashBoardData : DashboardData[]
+  dashBoardData : FarmDataTable[];
 }
 export default function CustomizedAccordions({
   dashBoardData
@@ -49,7 +50,7 @@ export default function CustomizedAccordions({
 
   return (
     <Stack spacing={2}>
-      {dashBoardData.map(({ pool_name, address, pid, alloc_point }, index) => {
+      {dashBoardData && dashBoardData.map(({pid, pool_name, tvl,amountUSD,amountBigNumber, simpliEarn, yearlyAPR }, index) => {
         const pool = convertPoolName(pool_name)
         const platform = pool_name.split(':')[0].toUpperCase()
         return (
@@ -110,7 +111,7 @@ export default function CustomizedAccordions({
                       fontStyle="normal"
                       color="#FFFFFF"
                     >
-                      $684.727
+                      ${amountUSD.toFixed(2)}
                     </Typography>
                   </Box>
                   <Box marginRight="80px">
@@ -121,7 +122,7 @@ export default function CustomizedAccordions({
                       fontStyle="normal"
                       color="#FFFFFF"
                     >
-                      10950.13825867
+                      {simpliEarn && displayWeiToEther(simpliEarn[0],8)}
                     </Typography>
                   </Box>
                   <Box marginRight="90px">
@@ -132,7 +133,7 @@ export default function CustomizedAccordions({
                       fontStyle="normal"
                       color="#FFFFFF"
                     >
-                      $684.727
+                      ${tvl && convertInternationalCurrentcy(+tvl)}
                     </Typography>
                   </Box>
                   <Box marginRight="120px">
@@ -154,7 +155,7 @@ export default function CustomizedAccordions({
                       fontStyle="normal"
                       color="#FFFFFF"
                     >
-                      117.41%
+                      {(+yearlyAPR).toFixed(2)}%
                     </Typography>
                   </Box>
                 </Stack>
@@ -189,11 +190,11 @@ export default function CustomizedAccordions({
                             fontWeight={500}
                             color="#FFFFFF"
                           >
-                            1.180084
+                            {simpliEarn && displayWeiToEther(simpliEarn[0],10)}
                           </Typography>
                         </div>
                       </Typography>
-                      <ClaimB />
+                      <ClaimB pid={pid} />
                     </Stack>
                   </Box>
                   <Box
@@ -223,7 +224,7 @@ export default function CustomizedAccordions({
                             fontWeight={500}
                             color="#FFFFFF"
                           >
-                            1.180084
+                            {displayWeiToEther(amountBigNumber[0],8)}
                           </Typography>
                         </div>
                       </Typography>
