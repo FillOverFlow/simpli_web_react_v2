@@ -19,7 +19,7 @@ import UnstyledSelectSimple from '@/components/layout/selectBox';
 
 import CustomizedAccordions from '@/components/layout/accordion';
 import { useEthers, useTokenBalance } from '@usedapp/core';
-import YouPositionAPi, { tvlData }  from '@/apis/you_position';
+import YouPositionAPi, { DashboardData, tvlData }  from '@/apis/you_position';
 
 export interface PositionPageProps {}
 
@@ -87,6 +87,7 @@ const YourPosition: React.FunctionComponent<PositionPageProps> = (props) => {
   const { account } = useEthers()
   const walletAddress = account
   const simpliTokenAddress = import.meta.env.VITE_SIMPLI_TOKEN_ADDRESS as string
+  const [dashBoardData, setDashboardData] = useState<DashboardData[]>()
 
 
   const getTVL = async () => {
@@ -96,6 +97,13 @@ const YourPosition: React.FunctionComponent<PositionPageProps> = (props) => {
     const tvl: number = +dataTVL[0].tvl
     setTVL(tvl)
     console.log('tvl ', tvl)
+  }
+
+  const getDashboardData = async () => {
+    const response = await YouPositionAPi.getDashboardAPI()
+    const data : DashboardData[] = response ? JSON.parse(response): '';
+    setDashboardData(data)
+    console.log('dashboard data ', data)
   }
   
   
@@ -108,7 +116,9 @@ const YourPosition: React.FunctionComponent<PositionPageProps> = (props) => {
 
   useEffect(() =>{
     getTVL()
+    getDashboardData()
   },[])
+
 
   return (
     <Box width="100%">
@@ -516,7 +526,7 @@ const YourPosition: React.FunctionComponent<PositionPageProps> = (props) => {
                 APR (SIMPLI)
               </Typography>
             </Stack>
-            <CustomizedAccordions />
+            <CustomizedAccordions dashBoardData={dashBoardData ? dashBoardData : []} />
           </Stack>
         </Stack>
       </Stack>
