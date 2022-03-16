@@ -9,8 +9,10 @@ import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import { Box, Divider, Stack } from '@mui/material';
 import ethbtc from '../../assets/eth-btc.svg';
-import { ButtonEx, ClaimB } from './button';
+import { ButtonBase, ButtonEx, ClaimB } from './button';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
+
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters square {...props} />
 ))(({ theme }) => ({
@@ -210,8 +212,8 @@ export default function CustomizedAccordions() {
                       </Typography>
                     </div>
                   </Typography>
-                  {ButtonEx('Withdraw')}
-                  {ButtonEx('Deposit')}
+                  {<ButtonBase title={'WithDraw'}/>}
+                  {<ButtonBase title={'Deposit'} />}
                 </Stack>
               </Box>
             </Stack>
@@ -388,8 +390,8 @@ export default function CustomizedAccordions() {
                       </Typography>
                     </div>
                   </Typography>
-                  {ButtonEx('Withdraw')}
-                  {ButtonEx('Deposit')}
+                  {<ButtonBase title={'WithDraw'}/>}
+                  {<ButtonBase title={'Deposit'} />}
                 </Stack>
               </Box>
             </Stack>
