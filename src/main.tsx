@@ -14,29 +14,7 @@ ReactDOM.render(
     <ChosenThemeProvider>
       <ThemeProvider>
         <App />
-        <Stack
-          bgcolor="rgba(14, 31, 45, 1)"
-          width="100%"
-          height="110px"
-          px="146px"
-          py="24px"
-          justifyContent="center"
-        >
-          <Stack
-            flexDirection="row"
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <Box alignItems="flex-start">
-              <LogoFooter />
-            </Box>
-            <Stack flexDirection="row">
-              <SocialMediaComponent />
-              <Box width="53px" />
-              {AuditByComponent('35px', '99px')}
-            </Stack>
-          </Stack>
-        </Stack>
+       
       </ThemeProvider>
     </ChosenThemeProvider>
   </StrictMode>,

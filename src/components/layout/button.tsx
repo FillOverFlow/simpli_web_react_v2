@@ -299,3 +299,33 @@ export const MaxButton = (title: string) => {
     </MaxStyleButton>
   );
 };
+
+const InvestButtonStyle = styled(Button)({
+  backgroundColor: '#454F5B',
+  height: '48px',
+  width: '208px',
+  borderRadius: '8px',
+  textTransform: 'none',
+  order: '0px',
+  flex: 'none',
+  flexGrow: '0px',
+  margin: '0px 6px'
+});
+
+export const InvestButton = () => {
+  return (
+    <InvestButtonStyle variant="contained" disableRipple>
+      <Typography
+        sx={{
+          color: '#C4CDD5',
+          fontSize: 13,
+          textAlign: 'center',
+          fontStyle: 'normal',
+          fontWeight: '700px'
+        }}
+      >
+        Invest
+      </Typography>
+    </InvestButtonStyle>
+  );
+};

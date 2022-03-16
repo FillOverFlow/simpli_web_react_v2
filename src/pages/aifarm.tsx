@@ -13,8 +13,8 @@ const AIFarm: React.FunctionComponent<IHomePageProps> = (props) => {
   let price: number = 1.03;
   let price2: number = 2.0;
   let price3: number = 6006930.31;
-  return (  
-    <Box maxWidth="1248px">
+  return (
+    <Box>
       <Stack direction="column">
         <Box width="293 px" height="48px" justifyContent="flex-start" mb="24px">
           <Stack direction="row" spacing={2} alignItems="center">
@@ -271,8 +271,15 @@ const AIFarm: React.FunctionComponent<IHomePageProps> = (props) => {
           </Stack>
         </Stack>
         <Stack
-          style={{ width: '100%', height: '298px' }}
-          className="assetAllocation"
+          sx={{
+            background: '#17283c',
+            border: '1px solid #002339',
+            boxShadow: ` 0px 0px 2px rgba(0, 0, 0, 0.24),
+          0px 16px 32px -4px rgba(0, 0, 0, 0.24)`,
+            borderRadius: '16px',
+            height: '293px',
+            maxWidth: '100%'
+          }}
         ></Stack>
       </Stack>
     </Box>
