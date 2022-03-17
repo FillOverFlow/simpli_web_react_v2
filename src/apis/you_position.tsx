@@ -41,18 +41,18 @@ export interface DashboardData {
 }
 
 export interface FarmDataTable  {
-  amountUSD: number;
-  simpliEarn: any[];
-  amountNumber: number;
-  amountBigNumber: any;
-  pool_name: string;
-  address: string;
-  pid: number;
-  alloc_point: number;
-  tvl: string;
-  dailyAPR: string;
-  weeklyAPR: string;
-  yearlyAPR: string;
-  lp_value_usd: string;
-  total_supply: string;
+  amountUSD: number | "" | undefined;
+  simpliEarn: any[] | undefined;
+  amountNumber: number | undefined;
+  amountBigNumber: any | undefined;
+  pool_name?: string | undefined;
+  address?: string | undefined;
+  alloc_point?: number | undefined;
+  pid?: number | undefined;
+  tvl?: string | undefined;
+  dailyAPR?: string | undefined;
+  weeklyAPR?: string | undefined;
+  yearlyAPR?: string | undefined;
+  lp_value_usd?: string | undefined;
+  total_supply?: string | undefined;
 }

@@ -9,7 +9,7 @@ const SimpliChefAddress = import.meta.env.VITE_SIMPLI_CHEF_ADDRESS  as string;
 const contract = new Contract(SimpliChefAddress, SimpliCheftInterface);
 
 
-export function useStakedWantTokenList(pidList: any[], walletAddress){
+export function useStakedWantTokenList(pidList: any[], walletAddress: any){
   return useContractCalls(
     pidList && walletAddress 
     ? pidList.map((pid: any) => ({
@@ -22,7 +22,7 @@ export function useStakedWantTokenList(pidList: any[], walletAddress){
   )
 }
 
-export function useStakedWantToken(pid,address) {
+export function useStakedWantToken(pid : number[],address : any) {
   const [stakedWantTokens] : any = useContractCall({
     abi: SimpliCheftInterface,
     address: SimpliChefAddress,
@@ -32,7 +32,7 @@ export function useStakedWantToken(pid,address) {
   return stakedWantTokens
 }
 
-export function useUserInfo(pid,address) {
+export function useUserInfo(pid : number[],address : string) {
   const [shares, rewardDebt] : any = useContractCall({
     abi: SimpliCheftInterface,
     address: SimpliChefAddress,
@@ -62,7 +62,7 @@ export function useSIMPLIPerBlock(){
   return simpliPerBlock
 }
 
-export function usePendingSIMPLI(pid,address) {
+export function usePendingSIMPLI(pid : number,address : string) {
   const [pendingSIMPLI] : any = useContractCall({
     abi: SimpliCheftInterface,
     address: SimpliChefAddress,
@@ -73,7 +73,7 @@ export function usePendingSIMPLI(pid,address) {
 }
 
 
-export function usePendingSIMPLIList(pidList: any[], walletAddress) {
+export function usePendingSIMPLIList(pidList: any[], walletAddress : any) {
   return useContractCalls(
     pidList && walletAddress 
     ? pidList.map((pid: any , index) => ({
@@ -86,7 +86,7 @@ export function usePendingSIMPLIList(pidList: any[], walletAddress) {
   )
 }
 
-export function usePoolInfo(pid) {
+export function usePoolInfo(pid: any) {
   const [want,allocPoint,lastRewardBlock,accSIMPLIPerShare,strat] : any = useContractCall({
     abi: SimpliCheftInterface,
     address: SimpliChefAddress,

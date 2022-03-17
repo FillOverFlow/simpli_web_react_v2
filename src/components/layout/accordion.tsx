@@ -51,10 +51,10 @@ export default function CustomizedAccordions({
   return (
     <Stack spacing={2}>
       {dashBoardData && dashBoardData.map(({pid, pool_name, tvl,amountUSD,amountBigNumber, simpliEarn, yearlyAPR }, index) => {
-        const pool = convertPoolName(pool_name)
-        const platform = pool_name.split(':')[0].toUpperCase()
+        const pool =  pool_name && convertPoolName(pool_name)
+        const platform = pool_name && pool_name.split(':')[0].toUpperCase()
         return (
-          <div>
+          <div key={pid}>
             <Accordion
               expanded={expanded === `pool_${index}`}
               onChange={handleChange(`pool_${index}`)}
@@ -111,7 +111,7 @@ export default function CustomizedAccordions({
                       fontStyle="normal"
                       color="#FFFFFF"
                     >
-                      ${amountUSD.toFixed(2)}
+                      ${amountUSD && amountUSD.toFixed(2)}
                     </Typography>
                   </Box>
                   <Box marginRight="80px">
@@ -155,7 +155,7 @@ export default function CustomizedAccordions({
                       fontStyle="normal"
                       color="#FFFFFF"
                     >
-                      {(+yearlyAPR).toFixed(2)}%
+                      {yearlyAPR && (+yearlyAPR).toFixed(2)}%
                     </Typography>
                   </Box>
                 </Stack>

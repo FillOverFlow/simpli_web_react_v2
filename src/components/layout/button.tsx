@@ -143,7 +143,7 @@ export const ClaimB = (props: IButton) => {
     deposit(pid,0)
   }
   return (
-    <ClaimX variant="contained" onClick={() => handleClaim(props.pid)} disableRipple>
+    <ClaimX variant="contained" onClick={() => props.pid && handleClaim(props.pid)} disableRipple>
       <Typography
         sx={{
           color: '#204C3F',

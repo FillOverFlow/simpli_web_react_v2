@@ -85,9 +85,19 @@ const SelectionMenu = () => {
   );
 };
 
-interface FarmDataFilterMerge extends DashboardData ,tvlData {
-  amountNumber : number
-  amountBigNumber : any
+interface FarmDataFilterMerge  {
+  amountNumber : number | undefined
+  amountBigNumber : any | undefined
+  pool_name? : string | undefined
+  address?: string | undefined
+  alloc_point? : number | undefined
+  pid? : number | undefined 
+  tvl? : string | undefined
+  dailyAPR?: string | undefined
+  weeklyAPR?: string | undefined
+  yearlyAPR?: string | undefined
+  lp_value_usd?: string | undefined
+  total_supply?: string | undefined
 }
 
 const YourPosition: React.FunctionComponent<PositionPageProps> = (props) => {
@@ -101,7 +111,7 @@ const YourPosition: React.FunctionComponent<PositionPageProps> = (props) => {
   const [poolDataAndTVL , setPoolDataAndTVL] = useState<tvlData[]>()
   const [dashBoardData, setDashboardData] = useState<DashboardData[]>()
   const dashBoardDataMerge = dashBoardData && poolDataAndTVL && mergePoolDataWithTvl(dashBoardData,poolDataAndTVL)
-  const pidList = dashBoardDataMerge ? dashBoardDataMerge.map((item) =>  item.pid) : []
+  const pidList = dashBoardDataMerge ? dashBoardDataMerge.map((item) =>  item && item.pid) : []
 
   //call check StakedWant from contract
   const stakedWantTokenList = useStakedWantTokenList(pidList, walletAddress)
@@ -115,7 +125,7 @@ const YourPosition: React.FunctionComponent<PositionPageProps> = (props) => {
       amountBigNumber: amountBigNumber
     }
   }): []
-  const dashBoardDataFilter   = dashBoardDataMapAmount.filter((item) => (item.amountNumber >= NUMBER_FILTER))
+  const dashBoardDataFilter   = dashBoardDataMapAmount.filter((item) =>  (item.amountNumber &&  (item.amountNumber >= NUMBER_FILTER)))
   
   const getTVL = async () => {
     const response =  await YouPositionAPi.getTotalTVLAPI()
@@ -147,7 +157,7 @@ const YourPosition: React.FunctionComponent<PositionPageProps> = (props) => {
     const farm  = dashBoardDataFilter.map((item,index)=> {
       return {
         ...item,
-        amountUSD : item.amountNumber * (+item.lp_value_usd),
+        amountUSD : item.amountNumber && item.lp_value_usd &&  (item.amountNumber * (+item.lp_value_usd)),
         simpliEarn : pendingSIMPIList[index]
       }
     })
