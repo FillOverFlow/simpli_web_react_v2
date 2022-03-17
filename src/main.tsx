@@ -9,7 +9,7 @@ import { Box } from '@mui/system';
 import { LogoFooter } from './components/footer/footer';
 import { AuditByComponent } from './components/layout/auditlogo';
 import { SocialMediaComponent } from './components/layout/socialmedia';
-import { MainNet , TestNet } from './config/chainnetwork';
+import { MainNet } from './config/chainnetwork';
 import { createGlobalStyle } from "styled-components"
 import sweetAlertStyle from '@/styles/sweetalert'
 
@@ -19,7 +19,7 @@ const GlobalStyle = createGlobalStyle`
   ${sweetAlertStyle}
 `
 const network = import.meta.env.VITE_APP_CHAIN_NETWORK as string;
-const config  = (network == 'mainnet') ? MainNet : TestNet
+const config  = MainNet 
 
 ReactDOM.render(
   <StrictMode>
