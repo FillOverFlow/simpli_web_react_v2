@@ -29,7 +29,7 @@ const ConnectWalletStyled = styled(Button)({
 export const ConnectWallet = () => {
   const { activateBrowserWallet, account } = useEthers();
   return (
-    <ConnectWalletStyled onClick={() => activateBrowserWallet}>
+    <ConnectWalletStyled onClick={() => activateBrowserWallet()}>
       <div>
         <img
           src={icon_wallet}
