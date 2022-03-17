@@ -108,9 +108,16 @@ const ClaimAll = styled(Button)({
   textTransform: 'none'
 });
 
-export const ClaimButton = () => {
+
+export const ClaimAllButton = (props: IButton) => {
+  const { state: depositState, send: deposit } = useDeposit()
+  const handleClaimAll = (pidList: number[]) => {
+    pidList.map((item) =>{
+      deposit(item,0)
+    })
+  }
   return (
-    <ClaimAll aria-label="claimbutton">
+    <ClaimAll onClick={() => props.pidList && handleClaimAll(props.pidList)} aria-label="claimbutton">
       <Typography
         style={{
           color: '#204C3F',
@@ -171,6 +178,7 @@ const WithdrawB = styled(Button)({
 interface IButton {
   title? : string
   pid? :number 
+  pidList? : number[]
   onClick?: () => any
   disabled?: boolean
 }

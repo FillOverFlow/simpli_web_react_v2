@@ -10,7 +10,7 @@ import arrow from '../assets/arrow.svg';
 
 import './style.css';
 import NumberFormat from 'react-number-format';
-import { ClaimButton } from '@/components/layout/button';
+import { ClaimAllButton } from '@/components/layout/button';
 
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
@@ -19,10 +19,10 @@ import UnstyledSelectSimple from '@/components/layout/selectBox';
 
 import CustomizedAccordions from '@/components/layout/accordion';
 import { useEthers, useTokenBalance } from '@usedapp/core';
-import YouPositionAPi, { DashboardData, FarmDataTable, tvlData }  from '@/apis/you_position';
-import { mergePoolDataWithTvl } from '@/utils';
+import { useCoingeckoPrice } from '@usedapp/coingecko';
+import YouPositionAPi, { DashboardData, tvlData }  from '@/apis/you_position';
 import { usePendingSIMPLIList, useStakedWantTokenList } from '@/hooks/simplichef';
-import { weiToFloat } from '@/utils/web3';
+import { displayWeiToEther, weiToFloat } from '@/utils/web3';
 
 
 export interface PositionPageProps {}
@@ -101,8 +101,6 @@ interface FarmDataFilterMerge  {
 }
 
 const YourPosition: React.FunctionComponent<PositionPageProps> = (props) => {
-  let price: number = 1.03;
-  let price2: number = 2.0;
   const NUMBER_FILTER =  0.0001
   const { account } = useEthers()
   const walletAddress = account
@@ -110,13 +108,13 @@ const YourPosition: React.FunctionComponent<PositionPageProps> = (props) => {
   const [tvl, setTVL] = useState(0)
   const [poolDataAndTVL , setPoolDataAndTVL] = useState<tvlData[]>()
   const [dashBoardData, setDashboardData] = useState<DashboardData[]>()
-  const dashBoardDataMerge = dashBoardData && poolDataAndTVL && mergePoolDataWithTvl(dashBoardData,poolDataAndTVL)
-  const pidList = dashBoardDataMerge ? dashBoardDataMerge.map((item) =>  item && item.pid) : []
+  // const dashBoardDataMerge = dashBoardData && poolDataAndTVL && mergePoolDataWithTvl(dashBoardData,poolDataAndTVL)
+  const pidList = dashBoardData ? dashBoardData.map((item) =>  item && item.pid) : []
 
   //call check StakedWant from contract
   const stakedWantTokenList = useStakedWantTokenList(pidList, walletAddress)
 
-  const dashBoardDataMapAmount = dashBoardDataMerge ? dashBoardDataMerge.map((item ,index) => {
+  const dashBoardDataMapAmount = dashBoardData ? dashBoardData.map((item ,index) => {
     const amountBigNumber = stakedWantTokenList[index]
     const amountNumber = amountBigNumber && weiToFloat(amountBigNumber[0])
     return {
@@ -148,7 +146,10 @@ const YourPosition: React.FunctionComponent<PositionPageProps> = (props) => {
   
   //Start StmartContract 
   const pidListFilter = dashBoardDataFilter.map((item) => item.pid)
-  const balanceSIMPLI = useTokenBalance(simpliTokenAddress, walletAddress)
+  const balanceSIMPLI = useTokenBalance(simpliTokenAddress, walletAddress) 
+  const priceSIMPLI =   useCoingeckoPrice('simpli-finance', 'usd') || 0
+  const priceBNB =   useCoingeckoPrice('binancecoin', 'usd') || 0
+  const balanceSIMPLIUSD = balanceSIMPLI && priceSIMPLI && weiToFloat(balanceSIMPLI) * (+priceSIMPLI)
   const [totalInvest, setTotalInvest] = useState(500)
   const pendingSIMPIList = usePendingSIMPLIList(pidListFilter,walletAddress)  
   //End SmartContract
@@ -165,12 +166,21 @@ const YourPosition: React.FunctionComponent<PositionPageProps> = (props) => {
     return farm
   }
   const farmDataTable = updateFarmDataTable(dashBoardDataFilter)
-
+  const totalPendingSIMPLI = pendingSIMPIList ? pendingSIMPIList.reduce((previous, current) => {
+    const pendingNumber = current && weiToFloat(current[0])
+    return pendingNumber ?  previous + pendingNumber : 0
+  },0) : 0
+  const totalPendingSIMPLIUSD = totalPendingSIMPLI && priceSIMPLI && (totalPendingSIMPLI * +priceSIMPLI)
 
   useEffect(() =>{
     getTVL()
     getDashboardData()
   },[])
+
+  useEffect(() => {
+    console.log('check datamerge ', dashBoardData)
+
+  },[dashBoardData])
 
 
   return (
@@ -283,7 +293,7 @@ const YourPosition: React.FunctionComponent<PositionPageProps> = (props) => {
                 color="#6CFFD3"
               >
                 <NumberFormat
-                  value={price}
+                  value={displayWeiToEther(balanceSIMPLI,4)}
                   displayType={'text'}
                   thousandSeparator={true}
                 />
@@ -294,7 +304,7 @@ const YourPosition: React.FunctionComponent<PositionPageProps> = (props) => {
                 fontStyle="normal"
                 color="#6CFFD3"
               >
-                $SIMPLI
+                SIMPLI
               </Typography>
             </Stack>
             <Typography
@@ -303,7 +313,7 @@ const YourPosition: React.FunctionComponent<PositionPageProps> = (props) => {
               fontStyle="normal"
               color="#F9FAFB"
             >
-              $ 0.0
+              $ {balanceSIMPLIUSD ? balanceSIMPLIUSD.toFixed(2) : 0.0}
             </Typography>
           </Box>
           <Stack width="100%" height="32px">
@@ -362,12 +372,12 @@ const YourPosition: React.FunctionComponent<PositionPageProps> = (props) => {
                 fontStyle="normal"
                 color="#C4CDD5"
               >
-                $SIMPLI / UST
+                $SIMPLI / USD
               </Typography>
             </Stack>
           </Box>
           <Box width="93px" height="37px">
-            {price2 > price ? (
+            {(+priceSIMPLI) > (+priceBNB) ? (
               <Stack direction="row" alignItems="center" spacing={1}>
                 <img
                   src={arrow}
@@ -386,7 +396,7 @@ const YourPosition: React.FunctionComponent<PositionPageProps> = (props) => {
                     color: '#F9FAFB'
                   }}
                 >
-                  {price} UST
+                {priceSIMPLI} USD 
                 </div>
               </Stack>
             ) : (
@@ -408,7 +418,7 @@ const YourPosition: React.FunctionComponent<PositionPageProps> = (props) => {
                     color: '#F9FAFB'
                   }}
                 >
-                  {price} UST
+                  {priceSIMPLI} USD
                 </div>
               </Stack>
             )}
@@ -444,7 +454,7 @@ const YourPosition: React.FunctionComponent<PositionPageProps> = (props) => {
                 }}
               >
                 <NumberFormat
-                  value={1.01}
+                  value={totalPendingSIMPLI.toFixed(2)}
                   displayType={'text'}
                   thousandSeparator={true}
                 />
@@ -457,7 +467,7 @@ const YourPosition: React.FunctionComponent<PositionPageProps> = (props) => {
                   color: '#6CFFD3'
                 }}
               >
-                $SIMPLI
+                SIMPLI
               </Typography>
             </Stack>
             <Typography
@@ -469,9 +479,9 @@ const YourPosition: React.FunctionComponent<PositionPageProps> = (props) => {
                 marginBottom: '17px'
               }}
             >
-              $ 0.0
+              $ {totalPendingSIMPLIUSD ? totalPendingSIMPLIUSD.toFixed(2) : 0.0}
             </Typography>
-            <ClaimButton />
+            <ClaimAllButton pidList={pidListFilter} />
           </Box>
         </Stack>
       </Stack>
