@@ -6,6 +6,7 @@ import Farm from './pages/farm';
 import YourPosition from './pages/your_position';
 import Stake from './pages/stake';
 import DocumentPage from './pages/document';
+import Efficient from './pages/efficient';
 // import routesList, { RouteType } from './routes';
 
 // const mapRoutes = (routes: RouteType[]) =>
@@ -15,21 +16,22 @@ import DocumentPage from './pages/document';
 
 export interface IApplicationProps {}
 
-const Application: React.FunctionComponent<IApplicationProps> = props => {
-    return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<AppLayout />}>
-                    <Route index element={<AIFarm />} />
-                    <Route path="aifarm" element={<AIFarm />} />
-                    <Route path="farm" element={<Farm />} />
-                    <Route path="position" element={<YourPosition />} />
-                    <Route path="stake" element={<Stake />} />
-                    <Route path="document" element={<DocumentPage />} />
-                </Route>
-            </Routes>
-        </BrowserRouter>
-    );
+const Application: React.FunctionComponent<IApplicationProps> = (props) => {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<AppLayout />}>
+          <Route index element={<AIFarm />} />
+          <Route path="aifarm" element={<AIFarm />} />
+          <Route path="farm" element={<Farm />} />
+          <Route path="position" element={<YourPosition />} />
+          <Route path="stake" element={<Stake />} />
+          <Route path="document" element={<DocumentPage />} />
+          <Route path="efficient" element={<Efficient />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
 };
 
 export default Application;

@@ -3,7 +3,10 @@ import icon_wallet from '../../assets/icon_wallet.png';
 import logosimplix from '../../assets/logosimplix.svg';
 import iconsimpli from '../../assets/iconsimpli.png';
 import iconwallet_black from '../../assets/iconwallet_black.svg';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router';
+import Efficient from '@/pages/efficient';
+import { Link } from 'react-router-dom';
 
 const ConnectWalletStyled = styled(Button)({
   backgroundColor: 'rgba(108, 255, 211, 0.16)',
@@ -39,7 +42,7 @@ export const ConnectWallet = () => {
 const ConnectWallet2Styled = styled(Button)({
   backgroundColor: '#6CFFD3',
   height: '56px',
-  width: '158px',
+
   fontSize: '14px',
   textAlign: 'center',
   fontStyle: 'normal',
@@ -327,5 +330,56 @@ export const InvestButton = () => {
         Invest
       </Typography>
     </InvestButtonStyle>
+  );
+};
+
+// interface SelectType {
+//   _disable: boolean;
+// }
+
+const SelectButtonStyle = styled(Button)({
+  backgroundColor: '#6CFFD3',
+  height: '48px',
+  width: '242px',
+  borderRadius: '16px',
+  textTransform: 'none'
+});
+
+
+export const SelectButton = (type: string) => {
+  const menuItem = {
+    display: 'Efficient Frontier',
+    to: '/efficient',
+    section: 'efficient'
+  };
+
+  // const location = useLocation();
+
+  // useEffect(() => {
+  //   const currPath = window.location.pathname.split('/')[1];
+  // }, [location]);
+  const typestatus = type === 'delta' ? false : true;
+  return (
+    <SelectButtonStyle
+      aria-label="selectbutton"
+      disabled={typestatus}
+      sx={{
+        backgroundColor: typestatus === true ? '#454F5B' : '#6CFFD3'
+      }}
+    >
+      <Link to={menuItem.to} style={{ textDecoration: 'none' }}>
+        <Typography
+          style={{
+            color: typestatus === true ? '#C4CDD5' : '#204C3F',
+            fontSize: '14px',
+            textAlign: 'center',
+            fontStyle: 'normal',
+            fontWeight: 'bold'
+          }}
+        >
+          {typestatus === true ? 'Coming Soon' : 'Select'}
+        </Typography>
+      </Link>
+    </SelectButtonStyle>
   );
 };
