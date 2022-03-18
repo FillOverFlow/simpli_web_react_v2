@@ -18,6 +18,7 @@ const SideBar = () => {
   const sidebarRef = useRef();
   const indicatorRef = useRef();
   const location = useLocation();
+  
   useEffect(() => {
     const curPath = window.location.pathname.split('/')[1];
     const activeItem = SidebarNavItem.findIndex(

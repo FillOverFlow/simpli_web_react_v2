@@ -1,4 +1,4 @@
-import { Box, IconButton, Stack, Typography } from '@mui/material';
+import { Box, Grid, IconButton, Stack, Typography } from '@mui/material';
 import './style.css';
 import NumberFormat from 'react-number-format';
 import detaillogo from '../assets/detaillogo.png';
@@ -7,14 +7,18 @@ import metamask from '../assets/metamask.svg';
 import iconsimpli from '../assets/iconsimpli.png';
 import arrow from '../assets/arrow.svg';
 import bscscan from '../assets/bscscan.svg';
+import { SelectButton } from '@/components/layout/button';
+import { useEffect } from 'react';
 export interface IHomePageProps {}
 
 const AIFarm: React.FunctionComponent<IHomePageProps> = (props) => {
   let price: number = 1.03;
   let price2: number = 2.0;
   let price3: number = 6006930.31;
-  return (  
-    <Box maxWidth="1248px">
+
+  
+  return (
+    <header className="ai-header">
       <Stack direction="column">
         <Box width="293 px" height="48px" justifyContent="flex-start" mb="24px">
           <Stack direction="row" spacing={2} alignItems="center">
@@ -45,7 +49,7 @@ const AIFarm: React.FunctionComponent<IHomePageProps> = (props) => {
         </Box>
         <Stack
           direction="row"
-          spacing="60px"
+          spacing="40px"
           mb="40px"
           justifyContent="space-between"
         >
@@ -270,12 +274,269 @@ const AIFarm: React.FunctionComponent<IHomePageProps> = (props) => {
             </Box>
           </Stack>
         </Stack>
-        <Stack
-          style={{ width: '100%', height: '298px' }}
-          className="assetAllocation"
-        ></Stack>
+        <Grid container spacing={9}>
+          <Grid item xs>
+            <Stack
+              direction="column"
+              padding="24px"
+              spacing="16px"
+              alignItems="center"
+              justifyContent="space-between"
+              sx={{
+                background: '#17283c',
+                border: '1px solid #002339',
+                boxShadow: `0px 0px 2px rgba(0, 0, 0, 0.24),
+                  0px 16px 32px -4px rgba(0, 0, 0, 0.24)`,
+                borderRadius: '16px',
+                height: '316px',
+                width: '290px'
+              }}
+            >
+              <Box
+                display="flex"
+                sx={{
+                  width: '56px',
+                  height: '56px',
+                  borderRadius: '360px',
+                  border: '1px solid #6CFFD3',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  background: 'rgba(108, 255, 211, 0.16)',
+                  boxSizing: 'border-box'
+                }}
+              >
+                <Typography
+                  fontSize="24px"
+                  fontStyle="normal"
+                  fontWeight="bold"
+                  color="#6CFFD3"
+                  textAlign="center"
+                >
+                  δ
+                </Typography>
+              </Box>
+              <Typography
+                fontSize="24px"
+                fontStyle="normal"
+                fontWeight="bold"
+                color="#F9FAFB"
+              >
+                Delta
+              </Typography>
+              <Typography
+                fontSize="12px"
+                fontStyle="normal"
+                fontWeight="normal"
+                color="#C4CDD5"
+              >
+                Efficient Frontier - maximize portfolio return while minimizing
+                the risk level.
+              </Typography>
+              <Stack direction="row">
+                <Typography
+                  fontSize="18px"
+                  fontStyle="normal"
+                  fontWeight="bold"
+                  color="#F9FAFB"
+                >
+                  Earn up to APY
+                </Typography>
+                <Typography
+                  fontSize="18px"
+                  fontStyle="normal"
+                  fontWeight="bold"
+                  color="#6CFFD3"
+                  paddingX="5px"
+                >
+                  50%
+                </Typography>
+                <Typography
+                  fontSize="18px"
+                  fontStyle="normal"
+                  fontWeight="bold"
+                  color="#F9FAFB"
+                >
+                  APY
+                </Typography>
+              </Stack>
+              {SelectButton('delta')}
+            </Stack>
+          </Grid>
+          <Grid item xs>
+            <Stack
+              direction="column"
+              padding="24px"
+              spacing="16px"
+              alignItems="center"
+              justifyContent="space-between"
+              sx={{
+                background: '#17283c',
+                border: '1px solid #002339',
+                boxShadow: `0px 0px 2px rgba(0, 0, 0, 0.24),
+                  0px 16px 32px -4px rgba(0, 0, 0, 0.24)`,
+                borderRadius: '16px',
+                height: '316px',
+                width: '290px'
+              }}
+            >
+              <Box
+                display="flex"
+                sx={{
+                  width: '56px',
+                  height: '56px',
+                  borderRadius: '360px',
+                  border: '1px solid #6CFFD3',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  background: 'rgba(108, 255, 211, 0.16)',
+                  boxSizing: 'border-box'
+                }}
+              >
+                <Typography
+                  fontSize="24px"
+                  fontStyle="normal"
+                  fontWeight="bold"
+                  color="#6CFFD3"
+                  textAlign="center"
+                >
+                  γ
+                </Typography>
+              </Box>
+              <Typography
+                fontSize="24px"
+                fontStyle="normal"
+                fontWeight="bold"
+                color="#F9FAFB"
+              >
+                Gamma
+              </Typography>
+              <Typography
+                fontSize="12px"
+                fontStyle="normal"
+                fontWeight="normal"
+                color="#C4CDD5"
+              >
+                Make DeFi Investments Simpler Using Artificial Intelligence
+              </Typography>
+              {/* <Stack direction="row">
+                <Typography
+                  fontSize="18px"
+                  fontStyle="normal"
+                  fontWeight="bold"
+                  color="#F9FAFB"
+                >
+                  Earn up to APY
+                </Typography>
+                <Typography
+                  fontSize="18px"
+                  fontStyle="normal"
+                  fontWeight="bold"
+                  color="#6CFFD3"
+                  paddingX="5px"
+                >
+                  50%
+                </Typography>
+                <Typography
+                  fontSize="18px"
+                  fontStyle="normal"
+                  fontWeight="bold"
+                  color="#F9FAFB"
+                >
+                  APY
+                </Typography>
+              </Stack> */}
+              {SelectButton('gramma')}
+            </Stack>
+          </Grid>
+          <Grid item xs>
+            <Stack
+              direction="column"
+              padding="24px"
+              spacing="16px"
+              alignItems="center"
+              justifyContent="space-between"
+              sx={{
+                background: '#17283c',
+                border: '1px solid #002339',
+                boxShadow: `0px 0px 2px rgba(0, 0, 0, 0.24),
+                  0px 16px 32px -4px rgba(0, 0, 0, 0.24)`,
+                borderRadius: '16px',
+                height: '316px',
+                width: '290px'
+              }}
+            >
+              <Box
+                display="flex"
+                sx={{
+                  width: '56px',
+                  height: '56px',
+                  borderRadius: '360px',
+                  border: '1px solid #6CFFD3',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  background: 'rgba(108, 255, 211, 0.16)',
+                  boxSizing: 'border-box'
+                }}
+              >
+                <Typography
+                  fontSize="24px"
+                  fontStyle="normal"
+                  fontWeight="bold"
+                  color="#6CFFD3"
+                  textAlign="center"
+                >
+                  λ
+                </Typography>
+              </Box>
+              <Typography
+                fontSize="24px"
+                fontStyle="normal"
+                fontWeight="bold"
+                color="#F9FAFB"
+              >
+                Lambda
+              </Typography>
+              <Typography
+                fontSize="12px"
+                fontStyle="normal"
+                fontWeight="normal"
+                color="#C4CDD5"
+              >
+                Make DeFi Investments Simpler Using Artificial Intelligence
+              </Typography>
+              {/* <Stack direction="row">
+                <Typography
+                  fontSize="18px"
+                  fontStyle="normal"
+                  fontWeight="bold"
+                  color="#F9FAFB"
+                >
+                  Earn up to APY
+                </Typography>
+                <Typography
+                  fontSize="18px"
+                  fontStyle="normal"
+                  fontWeight="bold"
+                  color="#6CFFD3"
+                  paddingX="5px"
+                >
+                  50%
+                </Typography>
+                <Typography
+                  fontSize="18px"
+                  fontStyle="normal"
+                  fontWeight="bold"
+                  color="#F9FAFB"
+                >
+                  APY
+                </Typography>
+              </Stack> */}
+              {SelectButton('lambda')}
+            </Stack>
+          </Grid>
+        </Grid>
       </Stack>
-    </Box>
+    </header>
   );
 };
 export default AIFarm;

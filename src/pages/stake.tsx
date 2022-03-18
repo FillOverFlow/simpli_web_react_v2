@@ -9,6 +9,8 @@ import { Box, Stack, Typography, Link } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import iconsimpli from '../assets/iconsimpli.png';
 import './style.css';
+import iconsimpli from '../assets/iconsimpli.png';
+import InputStake from '@/components/layout/inputstake';
 import * as Swal from '@/utils/sweetalert'
 import StakeAPI from '@/apis/stake'
 import { useEthers, useTokenBalance } from '@usedapp/core';
@@ -284,12 +286,7 @@ const Stake: React.FC<StakePageProps> = () => {
                 />
               </>
             </Stack>
-            <Stack
-              className="stake-box"
-              mt="24px"
-              padding="20px"
-              spacing="24px"
-            >
+            <Stack className="stake-box" mt="24px" padding="20px">
               <Stack direction="row" justifyContent="space-between">
                 <Typography
                   fontSize="20px"
@@ -297,7 +294,12 @@ const Stake: React.FC<StakePageProps> = () => {
                   fontStyle="normal"
                   color="#F9FAFB"
                 >
-                  {(stakeType=='stake') ? 'Stake' : 'UnStake'}
+                //   {(stakeType=='stake') ? 'Stake' : 'UnStake'}
+                  {stakeType === 'stake' ? (
+                    <div>Stake</div>
+                  ) : (
+                    <div>UnStake</div>
+                  )}
                 </Typography>
                 <Stack className="stake-rate" direction="row">
                   <Typography
@@ -334,19 +336,51 @@ const Stake: React.FC<StakePageProps> = () => {
                   </Typography>
                 </Stack>
               </Stack>
-
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                marginTop="24px"
+                marginBottom="9px"
+              >
+                <Typography
+                  fontSize="16px"
+                  fontWeight="normal"
+                  fontStyle="normal"
+                  color="#FFFFFF"
+                >
+                  Amount
+                </Typography>
+                <Stack direction="row" spacing={1}>
+                  <Typography
+                    fontSize="14px"
+                    fontWeight="500px"
+                    fontStyle="normal"
+                    color="#919EAB"
+                  >
+                    Balance:{' '}
+                  </Typography>
+                  <Typography
+                    fontSize="14px"
+                    fontWeight="500px"
+                    fontStyle="normal"
+                    color="#6CFFD3"
+                  >
+                    4.5682
+                  </Typography>
+                </Stack>
+              </Stack>
               <Stack
                 className="stake-boxx"
-                marginTop="24px"
                 paddingX="24px"
                 paddingY="16px"
                 direction="row"
                 justifyContent="space-between"
                 alignItems="center"
+                marginBottom='24px'
               >
                 <Typography
                   fontSize="16px"
-                  fontWeight={500}
+                  fontWeight="500px"
                   fontStyle="normal"
                   color="#F9FAFB"
                   display="flex"
@@ -371,7 +405,11 @@ const Stake: React.FC<StakePageProps> = () => {
                   )}
                 </Typography>
                 <Box display="flex" flexDirection="row">
-                  <Typography
+                  <div>
+                    <InputStake />
+                  </div>
+                  {/* <InputStake /> */}
+                  {/* <Typography
                     display="flex"
                     flexDirection="row"
                     fontSize="16px"
@@ -396,7 +434,7 @@ const Stake: React.FC<StakePageProps> = () => {
                     color="#6CFFD3"
                   >
                     Max
-                  </Link>
+                  </Link> */}
                 </Box>
               </Stack>
               {

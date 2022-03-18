@@ -16,14 +16,14 @@ export const ThemeProvider: FC = ({ children }) => {
   )
 }
 
-const brandColor = '#00b8d4'
+const brandColor = '#0E1F2D'
 const createThemeHelper = (theme: 'dark' | 'light') => {
   const isDark = theme === 'dark'
   return createTheme({
     palette: {
       mode: theme,
       background: {
-        default: isDark ? '#303030' : '#f0f0f0',
+        default: isDark ? '#0E1F2D' : '#f0f0f0',
         paper: isDark ? '#242526' : '#ffffff'
       },
       primary: {
