@@ -2,19 +2,17 @@ import {
   StakeButton,
   UnStakeButton,
   ConnectWallet2,
-  ButtonEx,
   ButtonBase
 } from '@/components/layout/button';
 import { Box, Stack, Typography, Link } from '@mui/material';
-import React, { useEffect, useState } from 'react';
-import iconsimpli from '../assets/iconsimpli.png';
+import React, { ChangeEventHandler, useEffect, useState } from 'react';
 import './style.css';
 import iconsimpli from '../assets/iconsimpli.png';
 import InputStake from '@/components/layout/inputstake';
 import * as Swal from '@/utils/sweetalert'
 import StakeAPI from '@/apis/stake'
 import { useEthers, useTokenBalance } from '@usedapp/core';
-import { displayWeiToEther, weiToFloat , etherToWei, weiToEther} from '@/utils/web3';
+import { displayWeiToEther, weiToFloat , etherToWei } from '@/utils/web3';
 import DialogLoading from '@/components/modal/DialogLoading';
 import ReactDOMServer from 'react-dom/server';
 import { useStaking, useTotalSupply, useUnStaking } from '@/hooks/staking';
@@ -63,8 +61,15 @@ const Stake: React.FC<StakePageProps> = () => {
       return balanceSIMPLIStakeingFloat / totalSupplyFloat
     }else{
       return 1
+    }  
+  }
+
+  const onChangeInputAmount = (amount : string) => {
+    const value = amount.replace(/[+-]/g,"")
+    const regexOnlyNumber = /^\d*\.?\d*$/
+    if(value.split('.').join('').length <= 18 && regexOnlyNumber.test(value)){
+      setAmount(amount)
     }
-    
   }
 
   /** END  */
@@ -294,7 +299,6 @@ const Stake: React.FC<StakePageProps> = () => {
                   fontStyle="normal"
                   color="#F9FAFB"
                 >
-                //   {(stakeType=='stake') ? 'Stake' : 'UnStake'}
                   {stakeType === 'stake' ? (
                     <div>Stake</div>
                   ) : (
@@ -348,9 +352,9 @@ const Stake: React.FC<StakePageProps> = () => {
                   fontStyle="normal"
                   color="#FFFFFF"
                 >
-                  Amount
+                  {/* Amount */}
                 </Typography>
-                <Stack direction="row" spacing={1}>
+                {/* <Stack direction="row" spacing={1}>
                   <Typography
                     fontSize="14px"
                     fontWeight="500px"
@@ -367,7 +371,7 @@ const Stake: React.FC<StakePageProps> = () => {
                   >
                     4.5682
                   </Typography>
-                </Stack>
+                </Stack> */}
               </Stack>
               <Stack
                 className="stake-boxx"
@@ -387,7 +391,11 @@ const Stake: React.FC<StakePageProps> = () => {
                   flexDirection="row"
                   textAlign="center"
                 >
-                  <div>{amount}</div>
+                  {/* <div>{amount}</div> */}
+                  <InputStake 
+
+                    onChange={onChangeInputAmount} 
+                    value={amount} />
                   <Box width={8} />
                   <img
                     src={iconsimpli}
@@ -405,11 +413,7 @@ const Stake: React.FC<StakePageProps> = () => {
                   )}
                 </Typography>
                 <Box display="flex" flexDirection="row">
-                  <div>
-                    <InputStake />
-                  </div>
-                  {/* <InputStake /> */}
-                  {/* <Typography
+                  <Typography
                     display="flex"
                     flexDirection="row"
                     fontSize="16px"
@@ -434,7 +438,7 @@ const Stake: React.FC<StakePageProps> = () => {
                     color="#6CFFD3"
                   >
                     Max
-                  </Link> */}
+                  </Link>
                 </Box>
               </Stack>
               {

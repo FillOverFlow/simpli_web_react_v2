@@ -7,7 +7,7 @@ import {
   styled,
   TextField
 } from '@mui/material';
-import * as React from 'react';
+import React, { useRef, useState } from 'react';
 // import InputUnstyled, { InputUnstyledProps } from '@mui/base/InputUnstyled';
 
 // const StyledInputElement = styled('input')(
@@ -44,35 +44,41 @@ interface State {
   amount: string;
 }
 
-export default function InputStake() {
-  const inputRef = React.useRef<HTMLInputElement>(null);
-  const [values, setValues] = React.useState<State>({
-    amount: ''
-  });
-  const handleChange =
-    (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
-      setValues({ ...values, [prop]: event.target.value });
-    };
+interface IProps {
+  value : string
+  onChange : (e: any) => any
+}
+
+export default  function InputStake({ value, onChange }: IProps){
+  const inputRef = useRef<HTMLInputElement>(null);
+  // const [values, setValues] = useState<State>({
+  //   amount: ''
+  // });
+  // const handleChange =
+  //   (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
+  //     setValues({ ...values, [prop]: event.target.value });
+  //   };
   return (
     <TextField
       type="text"
       maxRows={25}
       id="outlined-basic"
       variant="standard"
-      value={values.amount}
+      value={value}
       ref={inputRef}
-      onChange={handleChange('amount')}
+      onChange={(e) => onChange(e.target.value)}
       InputProps={{
         disableUnderline: true,
         placeholder: '0',
         style: {
+          color: 'white',
           textAlign: 'right',
-          width: values.amount.length ? `${values.amount.length}ch` : '2ch'
+          width: value.length ? `${value.length}ch` : '2ch'
         }
       }}
     />
   );
-}
+};
 
 //                color: #919EAB;
 //                font-size: 16px;
