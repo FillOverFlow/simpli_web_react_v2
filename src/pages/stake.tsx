@@ -233,12 +233,6 @@ const Stake: React.FC<StakePageProps> = () => {
       </Typography>
       <Stack direction="row">
         <Box>
-          <h3>totalSupply staking Address : {displayWeiToEther(totalSupplyXSIMPLI)} </h3>
-          <h3>balanceSIMPLIStaking  : {displayWeiToEther(balanceSIMPLIStaking)} </h3>
-        </Box>
-      </Stack>
-      <Stack direction="row">
-        <Box>
           <Stack
             className="apr-bar"
             mt="24px"
