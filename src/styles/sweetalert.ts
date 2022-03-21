@@ -1,5 +1,6 @@
 import { css } from 'styled-components';
 import { colors as c } from '@/styles/ci';
+import { breakPoints } from './snippets';
 
 const colors = {
   ...c,
@@ -10,16 +11,18 @@ const colors = {
 export default css`
   .swal-loader {
     position: absolute;
-    top: 120px;
-    width: 160px !important;
-    height: 160px !important;
-    border-width: 10px !important;
+    top: 60px;
+    width: 53.33px !important;
+    height: 53.33px !important;
+    border-width: 3px !important;
     border-color: ${colors.ACCENT} ${colors.ACCENT} ${colors.ACCENT} transparent !important;
   }
 
   .swal2-popup {
     width: unset !important;
-    padding: 60px 120px !important;
+    /* max-width: 400px !important;
+    max-height: 400px !important; */
+    /* padding: 60px 120px !important; */
     background-color: ${colors.MODAL_COLOR} !important;
     color: ${colors.WHITE} !important;
     border-radius: 20px !important;
@@ -125,13 +128,13 @@ export default css`
   }
 
   .swal-stake-popup {
-    padding: 60px 120px !important;
+    /* padding: 60px 120px !important; */
     background-color: ${colors.MODAL_COLOR} !important;
     color: ${colors.WHITE} !important;
     border-radius: 20px !important;
 
     * {
-      color: ${colors.MODAL_COLOR} !important;
+      color: ${colors.WHITE} !important;
     }
 
     @media (max-width: ${768}px) {
@@ -140,6 +143,10 @@ export default css`
   }
 
   .swal-stake-title {
-    padding-top: 16rem !important;
+    padding-top: 5rem !important;
+
+    @media (max-width: ${breakPoints.md}px) {
+      padding-top: 6rem !important;
+    }
   }
 `;

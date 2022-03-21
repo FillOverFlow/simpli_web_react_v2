@@ -6,16 +6,21 @@ export const Container = styled.div`
   ${flexCol}
   justify-content: center;
   align-items: center;
-  padding-top: 220px;
+  padding-top: 100px;
 
+  .wait-title { 
+    margin-top: 3rem !important;
+  }
+  .donot-close-title {
+    margin-top: 1rem !important;
+  }
   .load-title {
-    padding-top: 48px;
-    font-size: 28px;
+    font-size: 16px !important;
   }
 
   .detail {
-    color: #FFFFFF99 !important;
-  }
+    font-size: 16px !important;
+  } 
 
   .swap-con {
     ${flexCol}
@@ -23,13 +28,15 @@ export const Container = styled.div`
     align-items: center;
     padding: 23px 94px;
     margin-top: 40px;
+    margin-left: 23px;
+    margin-right: 23px;
     border-radius: 4px;
     background: rgba(255, 255, 255, 0.1);
 
     @media (max-width: ${breakPoints.md}px) {
       padding: 34px 28px
     }
-  }
+  } 
 
   .accent {
     color: ${colors.ACCENT} !important;

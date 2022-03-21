@@ -97,11 +97,11 @@ const Stake: React.FC<StakePageProps> = () => {
 					title: 'swal-stake-title',
 					popup: 'swal-stake-popup',
 				},
-        titleText: label,
+        titleText: '',
         html: ReactDOMServer.renderToStaticMarkup(<DialogLoading 
-					label={label} 
-					labelLeft={labelLeft} 
-					valueLeft={valueLeft}/>),
+				action={label}
+        value={valueLeft}
+        />),
         showCloseButton: true
     })
   }
@@ -120,9 +120,9 @@ const Stake: React.FC<StakePageProps> = () => {
     Swal.SwalLoading({
         titleText: 'Some Title',
         html: ReactDOMServer.renderToStaticMarkup(<DialogLoading 
-					label={'label'} 
-					labelLeft={'labelLeft'} 
-					valueLeft={'valueLeft'}/>),
+          action='call API'
+          value='Staking'
+				/>),
         showCloseButton: true
     })
     try { 

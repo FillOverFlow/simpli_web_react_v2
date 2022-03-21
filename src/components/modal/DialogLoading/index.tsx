@@ -1,26 +1,21 @@
 import { Container } from './css'
 
 interface IProps {
-  label?: string
-  labelLeft?: string
-  labelRight?:string 
-  valueLeft?: string
-  valueRight?: string
-
+  action: string
+  value: string
 }
-export default ({ labelLeft='SIMPLI', labelRight='xSIMPLI'  , label='Staking' , valueLeft='0', valueRight='0'}: IProps) => { 
+export default ({ action, value}: IProps) => { 
 
     return (
-    <Container>
-      <h1 className='load-title'>Waiting for confirmation</h1>
-      <span className='detail'>Please confirm your information</span>
-      <div className='swap-con'>
-        <span>
-        {label} <span className='accent'>{valueLeft} {labelLeft} </span>
-          {/* to <span className='accent'>{toDisplayNumber(valueRight, false)} {labelRight}</span> */}
-        </span>
-        <span>{`\n Confirm this transaction in your wallet`}</span>
+      <div>
+        <Container>
+          <h2 className="wait-title">Waiting for comfirmation</h2>
+          <h5 className="donot-close-title">Do not close you internet browser</h5>
+          <div className="swap-con">
+            <h1 className="load-title">{action} <span className="accent">{value}</span></h1>
+            <span className="detail">Confirm this transaction in your wallet</span>
+          </div>
+        </Container>
       </div>
-    </Container>
     );  
 }
